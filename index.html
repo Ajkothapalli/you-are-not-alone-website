@@ -18,12 +18,12 @@
 <link rel="icon" href="assets/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink:#0E0C13; --paper:#F3EEE8; --dim:#A29CAA;
-    --warm:#F5996E; --cool:#9C8BF6; --gold1:#FBBF24; --gold2:#FB7185;
-    --line:rgba(243,238,232,.10); --card:rgba(243,238,232,.04);
+    --bg:#0E0C13; --surface:#18141F; --paper:#F3EEE8; --dim:#A29CAA;
+    --warm:#F5996E; --cool:#9C8BF6; --pink:#FB7185; --gold:#FBBF24; --mint:#7FE3B0;
+    --line:rgba(243,238,232,.14);
     --grad:
       radial-gradient(circle at 20% 22%, #FFB84D 0%, transparent 46%),
       radial-gradient(circle at 82% 16%, #A66BFF 0%, transparent 50%),
@@ -31,154 +31,148 @@
       radial-gradient(circle at 20% 86%, #FF6F61 0%, transparent 52%),
       radial-gradient(circle at 50% 48%, #ED3F8C 0%, transparent 64%);
     --grad-base:#C9358A;
-    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --disp:'Plus Jakarta Sans',system-ui,sans-serif; --sans:'Inter',system-ui,sans-serif;
     --maxw:1180px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--ink); color:var(--paper); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.6; overflow-x:hidden}
+  body{background:var(--bg); color:var(--paper); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.6; overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative; z-index:2}
-  .eyebrow{font-size:12px; letter-spacing:.24em; text-transform:uppercase; font-weight:600; opacity:.85}
+  .eyebrow{font-family:var(--disp); font-size:12px; letter-spacing:.18em; text-transform:uppercase; font-weight:700}
 
   /* ---------- nav ---------- */
-  nav{position:fixed; inset:0 0 auto 0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:15px 26px; transition:background .3s, backdrop-filter .3s, border-color .3s; border-bottom:1px solid transparent}
-  nav.scrolled{background:rgba(14,12,19,.72); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
-  .brand{display:flex; align-items:center; gap:10px; font-family:var(--serif); font-size:18px; font-weight:600}
-  .logomark{width:34px; height:34px; border-radius:10px; background:#0E0C13; display:grid; place-items:center; box-shadow:0 2px 10px rgba(0,0,0,.35); border:1px solid rgba(243,238,232,.14)}
+  nav{position:fixed; inset:0 0 auto 0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:14px 24px; transition:background .25s, border-color .25s; border-bottom:2.5px solid transparent; color:var(--paper)}
+  nav.scrolled{background:rgba(14,12,19,.82); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--disp); font-size:19px; font-weight:800}
+  .logomark{width:36px; height:36px; border-radius:11px; background:var(--bg); display:grid; place-items:center; border:2px solid rgba(243,238,232,.28); box-shadow:3px 3px 0 rgba(0,0,0,.4)}
   .logomark img{height:21px; width:auto; display:block}
-  .nav-links{display:flex; align-items:center; gap:28px}
-  .nav-links a{font-size:14px; color:var(--paper); opacity:.82; transition:opacity .2s}
+  .nav-links{display:flex; align-items:center; gap:26px; font-family:var(--disp); font-weight:600}
+  .nav-links a{font-size:14px; opacity:.9}
   .nav-links a:hover{opacity:1}
-  .os{display:inline-flex; align-items:center; gap:10px; background:#000; border:1px solid rgba(243,238,232,.2); padding:7px 14px; border-radius:999px}
+  .os{display:inline-flex; align-items:center; gap:10px; background:#000; color:#fff; border:2px solid rgba(243,238,232,.35); padding:8px 14px; border-radius:999px; box-shadow:3px 3px 0 rgba(243,238,232,.18)}
   .os svg{width:18px; height:18px; fill:#fff; display:block}
-  .os i{width:1px; height:16px; background:rgba(243,238,232,.3)}
+  .os i{width:2px; height:16px; background:rgba(255,255,255,.4)}
   @media(max-width:720px){ .nav-links a:not(.os){display:none} }
 
-  /* ---------- gradient bands + curves ---------- */
-  .grad{background-color:var(--grad-base); background-image:var(--grad); position:relative; overflow:hidden}
-  .curve-b{border-bottom-left-radius:50% 70px; border-bottom-right-radius:50% 70px}
-  .curve-t{border-top-left-radius:50% 70px; border-top-right-radius:50% 70px}
+  /* ---------- hero card (inset rounded gradient) ---------- */
+  .hero-wrap{padding:84px clamp(12px,2vw,22px) clamp(36px,5vw,64px)}
+  .hero-card{position:relative; overflow:hidden; border-radius:clamp(28px,3.6vw,40px); background-color:var(--grad-base); background-image:var(--grad); box-shadow:0 30px 80px rgba(0,0,0,.55); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:var(--paper); padding:clamp(74px,10vw,128px) 24px clamp(96px,12vw,140px); min-height:min(880px,calc(100vh - 130px))}
+  .hero-inner{max-width:920px; margin:0 auto; position:relative; z-index:2}
+  .huge{font-family:var(--disp); font-weight:800; font-size:clamp(46px,10vw,108px); line-height:1.04; letter-spacing:-.02em}
+  .hl{display:inline-block; background:var(--gold); color:var(--bg); border:3px solid var(--bg); border-radius:14px; box-shadow:5px 5px 0 var(--bg); padding:0 .12em; transform:rotate(-2deg)}
+  .lead{font-family:var(--sans); margin:30px auto 0; max-width:34ch; font-size:clamp(16px,2.1vw,20px); font-weight:500}
+  .stores{display:flex; gap:16px; justify-content:center; margin-top:36px; flex-wrap:wrap}
+  .store{display:inline-flex; align-items:center; gap:11px; padding:12px 20px; border-radius:16px; background:#000; color:#fff; border:3px solid #000; box-shadow:5px 5px 0 rgba(0,0,0,.55); transition:transform .12s, box-shadow .12s}
+  .store:hover{transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,.55)}
+  .store svg{width:24px; height:24px; flex:none}
+  .store span{display:flex; flex-direction:column; line-height:1.1; text-align:left}
+  .store small{font-size:10px; color:#d9d3de; letter-spacing:.04em; font-family:var(--disp); font-weight:600}
+  .store strong{font-size:15px; font-weight:700; font-family:var(--disp)}
+  .reassure{font-family:var(--disp); font-weight:600; margin-top:22px; font-size:13px; opacity:.92; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap}
+  .dot{width:4px;height:4px;border-radius:50%;background:currentColor;display:inline-block;opacity:.7}
 
-  /* ---------- hero ---------- */
-  .hero{padding:160px 0 130px; text-align:center}
-  .huge{font-family:var(--serif); font-weight:500; font-size:clamp(48px,11.5vw,128px); line-height:.96; letter-spacing:-.02em; text-shadow:0 2px 26px rgba(60,16,24,.25)}
-  .huge .it{font-style:italic; font-weight:600}
-  .hero .lead{margin:28px auto 0; max-width:30ch; font-size:clamp(16px,2.1vw,20px); opacity:.95}
-  .cta-pill{display:inline-flex; align-items:center; gap:9px; margin-top:34px; background:var(--paper); color:#9c2f17; font-weight:600; font-size:17px; padding:15px 32px; border-radius:999px; box-shadow:0 14px 36px rgba(0,0,0,.26); transition:transform .2s, box-shadow .2s}
-  .cta-pill:hover{transform:translateY(-3px); box-shadow:0 20px 46px rgba(0,0,0,.34)}
-  .reassure{margin-top:20px; font-size:13px; opacity:.82; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap}
-  .dot{width:3px;height:3px;border-radius:50%;background:currentColor;display:inline-block;opacity:.6}
-  .scroll-cue{position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:3; display:flex; flex-direction:column; align-items:center; gap:5px; color:var(--paper); opacity:.85; font-size:11px; letter-spacing:.22em; text-transform:uppercase; animation:cue 2.2s ease-in-out infinite}
-  .scroll-cue svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
-  @keyframes cue{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
-
-  /* floating emotion emojis */
-  .fe{position:absolute; z-index:1; pointer-events:none; font-size:clamp(34px,4.6vw,60px); line-height:1; filter:drop-shadow(0 12px 20px rgba(0,0,0,.32)); will-change:transform,translate}
-  .e1{top:15%; left:8%; transform:rotate(-10deg); animation:bobA 8s ease-in-out infinite}
-  .e2{top:19%; right:9%; transform:rotate(11deg); animation:bobB 9.5s ease-in-out infinite}
-  .e3{top:46%; left:5%; transform:rotate(6deg); animation:bobB 11s ease-in-out infinite}
-  .e4{top:42%; right:6%; transform:rotate(-8deg); animation:bobA 10s ease-in-out infinite}
-  .e5{bottom:16%; left:14%; transform:rotate(8deg); animation:bobA 9s ease-in-out infinite}
-  .e6{bottom:14%; right:15%; transform:rotate(-7deg); animation:bobB 10.5s ease-in-out infinite}
-  .e7{top:10%; left:47%; transform:rotate(4deg); animation:bobA 12s ease-in-out infinite}
+  .fe{position:absolute; z-index:1; pointer-events:none; font-size:clamp(34px,4.4vw,58px); line-height:1; filter:drop-shadow(0 12px 18px rgba(0,0,0,.3)); will-change:transform,translate}
+  .e1{top:13%; left:7%; transform:rotate(-10deg); animation:bobA 8s ease-in-out infinite}
+  .e2{top:17%; right:8%; transform:rotate(11deg); animation:bobB 9.5s ease-in-out infinite}
+  .e3{top:46%; left:4%; transform:rotate(6deg); animation:bobB 11s ease-in-out infinite}
+  .e4{top:42%; right:5%; transform:rotate(-8deg); animation:bobA 10s ease-in-out infinite}
+  .e5{bottom:18%; left:12%; transform:rotate(8deg); animation:bobA 9s ease-in-out infinite}
+  .e6{bottom:15%; right:13%; transform:rotate(-7deg); animation:bobB 10.5s ease-in-out infinite}
+  .e7{top:9%; left:47%; transform:rotate(4deg); animation:bobA 12s ease-in-out infinite}
   @keyframes bobA{0%,100%{translate:0 0}50%{translate:0 -16px}}
   @keyframes bobB{0%,100%{translate:0 0}50%{translate:0 14px}}
   @media(max-width:900px){ .fe{display:none} }
+  .scroll-cue{position:absolute; left:50%; bottom:24px; transform:translateX(-50%); z-index:3; display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--paper); font-family:var(--disp); font-weight:700; font-size:11px; letter-spacing:.18em; text-transform:uppercase; animation:cue 2.2s ease-in-out infinite}
+  .scroll-cue svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes cue{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
   /* ---------- trust strip ---------- */
-  .trust{border-bottom:1px solid var(--line)}
-  .trust .wrap{display:flex; flex-wrap:wrap; gap:14px 32px; justify-content:center; padding:24px}
-  .trust span{font-size:13.5px; color:var(--dim); display:flex; align-items:center; gap:9px}
-  .trust span::before{content:''; width:6px; height:6px; border-radius:50%; background:linear-gradient(var(--warm),var(--cool))}
+  .trust{border-top:2px solid var(--line); border-bottom:2px solid var(--line)}
+  .trust .wrap{display:flex; flex-wrap:wrap; gap:12px 16px; justify-content:center; padding:22px 24px}
+  .trust span{font-family:var(--disp); font-weight:600; font-size:13px; color:var(--paper); border:2px solid rgba(243,238,232,.32); border-radius:999px; padding:6px 14px}
 
   /* ---------- sections ---------- */
-  section.block{padding:clamp(80px,12vw,140px) 0}
-  .center{text-align:center; max-width:720px; margin:0 auto 60px}
-  h2{font-family:var(--serif); font-weight:500; font-size:clamp(32px,6vw,64px); line-height:1.02; letter-spacing:-.015em; margin-top:14px}
-  h2 .it{font-style:italic; color:var(--warm)}
-  .sub{margin-top:16px; color:var(--dim); font-size:clamp(15px,1.9vw,18px)}
+  section.block{padding:clamp(76px,11vw,128px) 0}
+  .center{text-align:center; max-width:760px; margin:0 auto 58px}
+  h2{font-family:var(--disp); font-weight:800; font-size:clamp(30px,5.6vw,58px); line-height:1.04; letter-spacing:-.015em; margin-top:14px}
+  h2 .it{color:var(--warm)}
+  .sub{margin-top:16px; color:var(--dim); font-size:clamp(15px,1.9vw,18px); font-weight:500}
 
-  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
-  .step{position:relative; overflow:hidden; background:var(--card); border:1px solid var(--line); border-radius:26px; padding:34px 28px; transition:transform .3s, border-color .3s}
-  .step::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--you),var(--them))}
-  .step::after{content:''; position:absolute; width:200px; height:200px; right:-64px; top:-64px; border-radius:50%; background:radial-gradient(circle,var(--you),transparent 70%); opacity:.13; pointer-events:none}
-  .step:hover{transform:translateY(-6px); border-color:rgba(243,238,232,.24)}
-  .step-wm{position:absolute; top:10px; right:20px; z-index:0; font-family:var(--serif); font-style:italic; font-size:66px; line-height:1; color:var(--you); opacity:.14}
-  .step .num{position:relative; z-index:1; font-family:var(--serif); font-size:18px; color:#0E0C13; width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-weight:600; background:linear-gradient(135deg,var(--you),var(--them))}
-  .step h3{position:relative; z-index:1; font-family:var(--serif); font-weight:500; font-size:22px; margin:18px 0 10px}
-  .step p{position:relative; z-index:1; color:var(--dim); font-size:15px}
+  /* dark brutalist card base */
+  .bcard{background:var(--surface); border:2.5px solid var(--paper); border-radius:22px; box-shadow:6px 6px 0 var(--ac, rgba(243,238,232,.18)); transition:transform .14s, box-shadow .14s}
+  .bcard:hover{transform:translate(3px,3px); box-shadow:3px 3px 0 var(--ac, rgba(243,238,232,.18))}
 
-  /* ---------- confessions (dark backdrop, varied palettes, parallax) ---------- */
-  .said{position:relative; background:linear-gradient(165deg,#1B1430 0%,#130F1C 58%,#0E0C13 100%)}
-  .said::before{content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(58% 46% at 50% 32%, rgba(249,78,139,.16), transparent 70%)}
-  .ac-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1060px; margin:0 auto}
-  @media(max-width:880px){ .ac-grid{grid-template-columns:1fr; max-width:440px} }
-  .acard{position:relative; background:#0B0910; border:1px solid rgba(243,238,232,.08); border-radius:26px; overflow:hidden; padding:28px; box-shadow:0 30px 70px rgba(0,0,0,.55); transition:box-shadow .3s, border-color .3s; will-change:transform}
-  .acard:hover{border-color:rgba(243,238,232,.2); box-shadow:0 36px 84px rgba(0,0,0,.62)}
-  .acard .waves{position:absolute; inset:0; width:100%; height:100%; z-index:0}
-  .ac-in{position:relative; z-index:1; display:flex; flex-direction:column; min-height:300px}
-  .ac-label{font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; margin-bottom:6px}
-  .ac-label.you{color:var(--you)} .ac-label.them{color:var(--them)}
-  .ac-text{font-family:var(--serif); font-size:18px; line-height:1.45; color:var(--paper); margin-bottom:4px}
-  .seam{margin:20px 0; text-align:center}
-  .seam .bar{height:1px; background:linear-gradient(90deg,transparent 0%,var(--you) 30%,var(--them) 70%,transparent 100%); margin-bottom:9px}
-  .seam-label{font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:var(--dim)}
-  .ac-foot{margin-top:auto; padding-top:14px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center}
-  .ac-felt{font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; color:var(--you)}
-  .ac-yna{font-family:var(--serif); font-style:italic; font-size:13px; color:rgba(243,238,232,.72)}
-  .p-ember{--you:#F5996E; --them:#FBBF24}
-  .p-twilight{--you:#9C8BF6; --them:#7FA0FF}
-  .p-rose{--you:#FB7185; --them:#F5996E}
+  /* steps */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:26px}
+  .step{padding:30px 26px}
+  .step.s1{--ac:var(--warm)} .step.s2{--ac:var(--pink)} .step.s3{--ac:var(--cool)}
+  .step .num{font-family:var(--disp); font-weight:800; font-size:22px; color:var(--bg); width:52px; height:52px; border:2.5px solid var(--bg); border-radius:14px; background:var(--ac); display:grid; place-items:center}
+  .step h3{font-family:var(--disp); font-weight:800; font-size:23px; margin:20px 0 10px}
+  .step p{color:var(--dim); font-size:15px; font-weight:500}
+
+  /* confessions — exact in-app card (waves + seam + serif voices) */
+  .said{background:#1C1828}
+  .ac-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px; max-width:1080px; margin:0 auto}
+  @media(max-width:880px){ .ac-grid{grid-template-columns:1fr; max-width:380px} }
+  .appcard{position:relative; overflow:hidden; background:#0E0C13; border:1px solid rgba(243,238,232,.06); border-radius:26px; padding:30px; min-height:460px; display:flex; flex-direction:column; box-shadow:0 24px 60px var(--glow); will-change:transform}
+  .appcard.ember{--you:#F5996E; --them:#FBBF24; --glow:rgba(194,86,58,.5)}
+  .appcard.twilight{--you:#9C8BF6; --them:#7FA0FF; --glow:rgba(76,64,164,.5)}
+  .appcard.rose{--you:#FB7185; --them:#A8407A; --glow:rgba(168,64,122,.5)}
+  .appcard .waves{position:absolute; inset:0; width:100%; height:100%; z-index:0}
+  .appcard .cin{position:relative; z-index:1; display:flex; flex-direction:column; flex:1}
+  .lab{font-family:var(--disp); font-weight:700; font-size:11px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:7px}
+  .lab.you{color:var(--you)} .lab.them{color:var(--them)}
+  .ctext{font-family:'Fraunces',Georgia,serif; font-size:19px; line-height:1.45; color:var(--paper)}
+  .seam{margin:20px 0 18px}
+  .seam .bar{height:1px; background:linear-gradient(90deg,transparent,var(--you) 30%,var(--them) 70%,transparent); margin-bottom:9px}
+  .seam .lbl{text-align:center; font-family:var(--disp); font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim)}
+  .cfoot{margin-top:auto; padding-top:14px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:10px}
+  .cfelt{font-family:var(--disp); font-weight:700; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--you)}
+  .cyna{font-family:'Fraunces',Georgia,serif; font-style:italic; font-size:14px; color:rgba(243,238,232,.7)}
 
   /* safety */
-  .pillars{display:grid; grid-template-columns:repeat(2,1fr); gap:20px}
-  .pillar{display:flex; gap:16px; padding:28px; background:var(--card); border:1px solid var(--line); border-radius:24px}
-  .pillar .ic{flex:none; width:46px; height:46px; border-radius:14px; display:grid; place-items:center; background:rgba(243,238,232,.06); border:1px solid var(--line)}
-  .pillar .ic svg{width:22px; height:22px; stroke:var(--warm); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
-  .pillar h3{font-family:var(--serif); font-weight:500; font-size:20px; margin-bottom:7px}
-  .pillar p{color:var(--dim); font-size:14.5px}
+  .pillars{display:grid; grid-template-columns:repeat(2,1fr); gap:28px}
+  .pillar{padding:28px; display:flex; gap:18px}
+  .pillar.k1{--ac:var(--gold)} .pillar.k2{--ac:var(--pink)} .pillar.k3{--ac:var(--mint)} .pillar.k4{--ac:var(--cool)}
+  .pillar .ic{flex:none; width:54px; height:54px; border:2.5px solid var(--bg); border-radius:15px; background:var(--ac); display:grid; place-items:center}
+  .pillar .ic svg{width:24px; height:24px; stroke:var(--bg); fill:none; stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round}
+  .pillar h3{font-family:var(--disp); font-weight:800; font-size:20px; margin-bottom:7px}
+  .pillar p{color:var(--dim); font-size:14.5px; font-weight:500}
 
-  /* final cta band */
-  .final{text-align:center; padding:clamp(96px,14vw,168px) 0}
-  .final h2{font-size:clamp(44px,9vw,104px); text-shadow:0 2px 26px rgba(60,16,24,.25)}
-  .stores{display:flex; gap:14px; justify-content:center; margin-top:34px; flex-wrap:wrap}
-  .store{display:inline-flex; align-items:center; gap:11px; padding:12px 20px; border-radius:16px; background:#000; border:1px solid rgba(243,238,232,.2); transition:transform .2s}
-  .store:hover{transform:translateY(-2px)}
-  .store svg{width:24px; height:24px; flex:none}
-  .store span{display:flex; flex-direction:column; line-height:1.1; text-align:left}
-  .store small{font-size:10px; color:#efe7ea; letter-spacing:.04em}
-  .store strong{font-size:15px; font-weight:600; color:#fff}
+  /* final cta card */
+  .final-wrap{padding:clamp(36px,5vw,72px) clamp(12px,2vw,22px) clamp(60px,8vw,96px)}
+  .final-card{position:relative; overflow:hidden; border-radius:clamp(28px,3.6vw,40px); background-color:var(--grad-base); background-image:var(--grad); box-shadow:0 30px 80px rgba(0,0,0,.5); text-align:center; color:var(--paper); padding:clamp(80px,11vw,140px) 24px}
+  .final-card .huge{font-size:clamp(42px,8vw,92px)}
 
   /* footer */
-  footer{padding:60px 0 42px; color:var(--dim)}
+  footer{color:#b9b3c0; padding:56px 0 40px; border-top:2px solid var(--line)}
   .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
   .foot-brand{max-width:300px}
-  .foot-brand .brand{margin-bottom:14px}
-  .foot-brand p{font-size:14px; line-height:1.6}
-  .foot-cols{display:flex; gap:64px; flex-wrap:wrap}
-  .foot-cols h4{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--paper); margin-bottom:14px; font-weight:600}
-  .foot-cols a{display:block; font-size:14px; margin-bottom:10px; transition:color .2s}
+  .foot-brand .brand{color:var(--paper); margin-bottom:14px}
+  .foot-brand p{font-size:14px; font-weight:500; line-height:1.6}
+  .foot-cols{display:flex; gap:60px; flex-wrap:wrap}
+  .foot-cols h4{font-family:var(--disp); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--paper); margin-bottom:14px; font-weight:700}
+  .foot-cols a{display:block; font-size:14px; font-weight:500; margin-bottom:10px}
   .foot-cols a:hover{color:var(--paper)}
-  .copy{margin-top:48px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:13px}
+  .copy{margin-top:46px; padding-top:22px; border-top:2px solid var(--line); display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:13px; font-weight:500}
 
   /* reveal */
-  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .8s cubic-bezier(.16,1,.3,1)}
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .6s ease, transform .7s cubic-bezier(.16,1,.3,1)}
   .reveal.in{opacity:1; transform:none}
-  .fade{opacity:0; transition:opacity .8s ease}
+  .fade{opacity:0; transition:opacity .7s ease}
   .fade.in{opacity:1}
 
   @media(max-width:860px){ .steps{grid-template-columns:1fr} .pillars{grid-template-columns:1fr} }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important; scroll-behavior:auto}
     .reveal,.fade{opacity:1; transform:none; transition:none}
-    .acard{transform:none!important}
+    [data-par]{transform:none!important}
   }
 </style>
 </head>
 <body id="top">
 
-<!-- wave gradient defs — three palettes (ember / twilight / rose) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <linearGradient id="eb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A3B22" stop-opacity="0"/><stop offset="1" stop-color="#8A3B22" stop-opacity="1"/></linearGradient>
   <linearGradient id="em" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C2563A" stop-opacity="0"/><stop offset="1" stop-color="#C2563A" stop-opacity="1"/></linearGradient>
@@ -205,36 +199,35 @@
   </div>
 </nav>
 
-<!-- ===================== HERO ===================== -->
-<header class="hero grad curve-b">
-  <span class="fe e1" aria-hidden="true">&#129303;</span>
-  <span class="fe e2" aria-hidden="true">&#128546;</span>
-  <span class="fe e3" aria-hidden="true">&#128173;</span>
-  <span class="fe e4" aria-hidden="true">&#10084;&#65039;</span>
-  <span class="fe e5" aria-hidden="true">&#128532;</span>
-  <span class="fe e6" aria-hidden="true">&#128566;</span>
-  <span class="fe e7" aria-hidden="true">&#129401;</span>
+<!-- ===================== HERO (inset card) ===================== -->
+<header class="hero-wrap">
+  <div class="hero-card">
+    <span class="fe e1" aria-hidden="true">&#129303;</span>
+    <span class="fe e2" aria-hidden="true">&#128546;</span>
+    <span class="fe e3" aria-hidden="true">&#128173;</span>
+    <span class="fe e4" aria-hidden="true">&#10084;&#65039;</span>
+    <span class="fe e5" aria-hidden="true">&#128532;</span>
+    <span class="fe e6" aria-hidden="true">&#128566;</span>
+    <span class="fe e7" aria-hidden="true">&#129401;</span>
 
-  <div class="wrap">
-    <p class="eyebrow">anonymous · adults only · free</p>
-    <h1 class="huge" style="margin-top:18px">say what you<br /><span class="it">can't say</span><br />out loud</h1>
-    <p class="lead">Release one true thing — with no name attached — and meet the one person who felt it too.</p>
-    <div class="stores" style="justify-content:center">
-      <a class="store" href="#" aria-label="Download on the App Store">
-        <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.46 2.22-1.2 3.02-.78.85-2.06 1.5-3.12 1.42-.13-1.12.42-2.3 1.13-3.06.79-.85 2.16-1.48 3.19-1.5.02.04.02.08 0 .12zM20.7 17.1c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-.99-4.03-.98-2.09.01-2.53.99-4.07.97-1.73-.01-3.05-1.78-4.04-3.35C-.04 15.9-.3 11.06 1.27 8.46c1.05-1.74 2.71-2.76 4.27-2.76 1.59 0 2.59 1 3.9 1 1.27 0 2.05-1 3.89-1 1.39 0 2.86.76 3.91 2.07-3.44 1.88-2.88 6.79.46 8.33z"/></svg>
-        <span><small>Download on the</small><strong>App Store</strong></span>
-      </a>
-      <a class="store" href="#" aria-label="Get it on Google Play">
-        <svg viewBox="0 0 36 40" aria-hidden="true"><path fill="#00D3FF" d="M1 1 19 20 1 39z"/><path fill="#00E676" d="M1 1 26 11.5 19 20z"/><path fill="#FFD600" d="M19 20 26 28.5 1 39z"/><path fill="#FF3D57" d="M19 20 26 11.5 33 18c2 1.1 2 4 0 5l-7 4z"/></svg>
-        <span><small>GET IT ON</small><strong>Google Play</strong></span>
-      </a>
+    <div class="hero-inner">
+      <p class="eyebrow">anonymous · adults only · free</p>
+      <h1 class="huge" style="margin-top:20px">say what you <span class="hl">can't</span> say out loud</h1>
+      <p class="lead">Release one true thing — with no name attached — and meet the one person who felt it too.</p>
+      <div class="stores">
+        <a class="store" href="#" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.46 2.22-1.2 3.02-.78.85-2.06 1.5-3.12 1.42-.13-1.12.42-2.3 1.13-3.06.79-.85 2.16-1.48 3.19-1.5.02.04.02.08 0 .12zM20.7 17.1c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-.99-4.03-.98-2.09.01-2.53.99-4.07.97-1.73-.01-3.05-1.78-4.04-3.35C-.04 15.9-.3 11.06 1.27 8.46c1.05-1.74 2.71-2.76 4.27-2.76 1.59 0 2.59 1 3.9 1 1.27 0 2.05-1 3.89-1 1.39 0 2.86.76 3.91 2.07-3.44 1.88-2.88 6.79.46 8.33z"/></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="store" href="#" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 36 40" aria-hidden="true"><path fill="#00D3FF" d="M1 1 19 20 1 39z"/><path fill="#00E676" d="M1 1 26 11.5 19 20z"/><path fill="#FFD600" d="M19 20 26 28.5 1 39z"/><path fill="#FF3D57" d="M19 20 26 11.5 33 18c2 1.1 2 4 0 5l-7 4z"/></svg>
+          <span><small>GET IT ON</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <p class="reassure">No replies, ever <span class="dot"></span> never tied to you <span class="dot"></span> crisis support, always free</p>
     </div>
-    <p class="reassure">No replies, ever <span class="dot"></span> never tied to you <span class="dot"></span> crisis support, always free</p>
+    <a class="scroll-cue" href="#how" aria-label="Scroll to learn more"><span>scroll</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
   </div>
-  <a class="scroll-cue" href="#how" aria-label="Scroll to learn more">
-    <span>scroll</span>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-  </a>
 </header>
 
 <!-- ===================== TRUST STRIP ===================== -->
@@ -257,55 +250,55 @@
       <p class="sub">Three quiet steps. No feed to scroll, no audience to perform for.</p>
     </div>
     <div class="steps">
-      <div class="step p-ember reveal"><span class="step-wm">1</span><div class="num">1</div><h3>say what you can't</h3><p>Write one true thing you've never said out loud. No name, no handle, no trace back to you.</p></div>
-      <div class="step p-rose reveal"><span class="step-wm">2</span><div class="num">2</div><h3>we keep it safe</h3><p>Every confession is checked before anyone can see it. Nothing harmful is ever matched or shown.</p></div>
-      <div class="step p-twilight reveal"><span class="step-wm">3</span><div class="num">3</div><h3>find who felt it too</h3><p>You're matched to one person who wrote the same ache — and see how many others felt it too.</p></div>
+      <div class="step bcard s1 reveal"><div class="num">1</div><h3>say what you can't</h3><p>Write one true thing you've never said out loud. No name, no handle, no trace back to you.</p></div>
+      <div class="step bcard s2 reveal"><div class="num">2</div><h3>we keep it safe</h3><p>Every confession is checked before anyone can see it. Nothing harmful is ever matched or shown.</p></div>
+      <div class="step bcard s3 reveal"><div class="num">3</div><h3>find who felt it too</h3><p>You're matched to one person who wrote the same ache — and see how many others felt it too.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== CONFESSIONS (real app cards) ===================== -->
+<!-- ===================== CONFESSIONS ===================== -->
 <section class="block said" id="said">
   <div class="wrap">
     <div class="center reveal">
-      <p class="eyebrow">the things people finally said</p>
+      <p class="eyebrow" style="color:var(--pink)">the things people finally said</p>
       <h2>you are <span class="it">not</span> the only one</h2>
       <p class="sub">This is the actual card you get — your words, beside the one person who felt the same.</p>
     </div>
     <div class="ac-grid">
-      <article class="acard p-ember fade" data-par="-54">
+      <article class="appcard ember fade" data-par="-54">
         <svg class="waves" viewBox="0 0 340 472" preserveAspectRatio="none"><path d="M0,300 C95,262 250,338 340,296 L340,472 L0,472 Z" fill="url(#eb)"/><path d="M0,350 C105,318 245,384 340,346 L340,472 L0,472 Z" fill="url(#em)"/><path d="M0,400 C115,376 235,432 340,398 L340,472 L0,472 Z" fill="url(#ef)"/></svg>
-        <div class="ac-in">
-          <div class="ac-label you">you wrote</div>
-          <p class="ac-text">"I act like I have it all together."</p>
-          <div class="seam"><div class="bar"></div><div class="seam-label">someone, at the same moment</div></div>
-          <div class="ac-label them">they wrote</div>
-          <p class="ac-text">"Everyone thinks I'm fine. I'm barely holding on."</p>
-          <div class="ac-foot"><span class="ac-felt">412 felt this too</span><span class="ac-yna">you're not alone</span></div>
+        <div class="cin">
+          <div class="lab you">you wrote</div>
+          <p class="ctext">"I act like I have it all together."</p>
+          <div class="seam"><div class="bar"></div><div class="lbl">someone, at the same moment</div></div>
+          <div class="lab them">they wrote</div>
+          <p class="ctext">"Everyone thinks I'm fine. I'm barely holding on."</p>
+          <div class="cfoot"><span class="cfelt">412 felt this too</span><span class="cyna">you're not alone</span></div>
         </div>
       </article>
 
-      <article class="acard p-twilight fade" data-par="44">
+      <article class="appcard twilight fade" data-par="44">
         <svg class="waves" viewBox="0 0 340 472" preserveAspectRatio="none"><path d="M0,300 C95,262 250,338 340,296 L340,472 L0,472 Z" fill="url(#tb)"/><path d="M0,350 C105,318 245,384 340,346 L340,472 L0,472 Z" fill="url(#tm)"/><path d="M0,400 C115,376 235,432 340,398 L340,472 L0,472 Z" fill="url(#tf)"/></svg>
-        <div class="ac-in">
-          <div class="ac-label you">you wrote</div>
-          <p class="ac-text">"I love my kids, but I miss who I used to be."</p>
-          <div class="seam"><div class="bar"></div><div class="seam-label">someone, at the same moment</div></div>
-          <div class="ac-label them">they wrote</div>
-          <p class="ac-text">"Some days I grieve the person I was before them."</p>
-          <div class="ac-foot"><span class="ac-felt">1,094 felt this too</span><span class="ac-yna">you're not alone</span></div>
+        <div class="cin">
+          <div class="lab you">you wrote</div>
+          <p class="ctext">"I love my kids, but I miss who I used to be."</p>
+          <div class="seam"><div class="bar"></div><div class="lbl">someone, at the same moment</div></div>
+          <div class="lab them">they wrote</div>
+          <p class="ctext">"Some days I grieve the person I was before them."</p>
+          <div class="cfoot"><span class="cfelt">1,094 felt this too</span><span class="cyna">you're not alone</span></div>
         </div>
       </article>
 
-      <article class="acard p-rose fade" data-par="-54">
+      <article class="appcard rose fade" data-par="-54">
         <svg class="waves" viewBox="0 0 340 472" preserveAspectRatio="none"><path d="M0,300 C95,262 250,338 340,296 L340,472 L0,472 Z" fill="url(#rb)"/><path d="M0,350 C105,318 245,384 340,346 L340,472 L0,472 Z" fill="url(#rm)"/><path d="M0,400 C115,376 235,432 340,398 L340,472 L0,472 Z" fill="url(#rf)"/></svg>
-        <div class="ac-in">
-          <div class="ac-label you">you wrote</div>
-          <p class="ac-text">"I'm always surrounded by people."</p>
-          <div class="seam"><div class="bar"></div><div class="seam-label">someone, at the same moment</div></div>
-          <div class="ac-label them">they wrote</div>
-          <p class="ac-text">"I've never felt more alone than in a full room."</p>
-          <div class="ac-foot"><span class="ac-felt">1,530 felt this too</span><span class="ac-yna">you're not alone</span></div>
+        <div class="cin">
+          <div class="lab you">you wrote</div>
+          <p class="ctext">"I'm always surrounded by people."</p>
+          <div class="seam"><div class="bar"></div><div class="lbl">someone, at the same moment</div></div>
+          <div class="lab them">they wrote</div>
+          <p class="ctext">"I've never felt more alone than in a full room."</p>
+          <div class="cfoot"><span class="cfelt">1,530 felt this too</span><span class="cyna">you're not alone</span></div>
         </div>
       </article>
     </div>
@@ -321,19 +314,19 @@
       <p class="sub">We removed everything that lets people hurt each other — then built around what's left.</p>
     </div>
     <div class="pillars">
-      <div class="pillar reveal">
+      <div class="pillar bcard k1 reveal">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z"/></svg></div>
         <div><h3>Never tied to you</h3><p>Your confession is split from your identity at the source. Even we can't connect it back to you.</p></div>
       </div>
-      <div class="pillar reveal">
+      <div class="pillar bcard k2 reveal">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div>
         <div><h3>No replies, profiles, or DMs</h3><p>There's no way for anyone to message, follow, or target you. The silence is the safety.</p></div>
       </div>
-      <div class="pillar reveal">
+      <div class="pillar bcard k3 reveal">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z"/></svg></div>
         <div><h3>Checked before it's shown</h3><p>Automated safety review runs on every post before it can ever be matched to another person.</p></div>
       </div>
-      <div class="pillar reveal">
+      <div class="pillar bcard k4 reveal">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
         <div><h3>Support, never a sale</h3><p>If you're in crisis you get resources, never a paywall. Relief is always free — that line never moves.</p></div>
       </div>
@@ -341,11 +334,11 @@
   </div>
 </section>
 
-<!-- ===================== FINAL CTA BAND ===================== -->
-<section class="final grad curve-t" id="get">
-  <div class="wrap reveal">
-    <h2 class="huge">say the <span class="it">thing</span></h2>
-    <p class="sub" style="color:rgba(255,255,255,.92)">It's waiting. So is the person who felt it too.</p>
+<!-- ===================== FINAL CTA (inset card) ===================== -->
+<section class="final-wrap" id="get">
+  <div class="final-card reveal">
+    <h2 class="huge">say the <span class="hl" style="background:var(--cool)">thing</span></h2>
+    <p class="lead" style="margin-top:24px">It's waiting. So is the person who felt it too.</p>
     <div class="stores">
       <a class="store" href="#" aria-label="Download on the App Store">
         <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.46 2.22-1.2 3.02-.78.85-2.06 1.5-3.12 1.42-.13-1.12.42-2.3 1.13-3.06.79-.85 2.16-1.48 3.19-1.5.02.04.02.08 0 .12zM20.7 17.1c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-.99-4.03-.98-2.09.01-2.53.99-4.07.97-1.73-.01-3.05-1.78-4.04-3.35C-.04 15.9-.3 11.06 1.27 8.46c1.05-1.74 2.71-2.76 4.27-2.76 1.59 0 2.59 1 3.9 1 1.27 0 2.05-1 3.89-1 1.39 0 2.86.76 3.91 2.07-3.44 1.88-2.88 6.79.46 8.33z"/></svg>
@@ -356,7 +349,7 @@
         <span><small>GET IT ON</small><strong>Google Play</strong></span>
       </a>
     </div>
-    <p class="reassure" style="opacity:.88">Free <span class="dot"></span> anonymous <span class="dot"></span> iOS &amp; Android</p>
+    <p class="reassure">Free <span class="dot"></span> anonymous <span class="dot"></span> iOS &amp; Android</p>
   </div>
 </section>
 
@@ -394,8 +387,6 @@
   addEventListener('scroll', function(){ nav.classList.toggle('scrolled', scrollY > 24); }, {passive:true});
 
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // entrance reveals
   var revealEls = document.querySelectorAll('.reveal, .fade');
   if (reduce) {
     revealEls.forEach(function(el){ el.classList.add('in'); });
@@ -404,10 +395,7 @@
       entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
     }, {threshold:.16});
     revealEls.forEach(function(el){ io.observe(el); });
-  }
 
-  // scroll-linked parallax on the confession cards
-  if (!reduce) {
     var pels = document.querySelectorAll('[data-par]');
     var ticking = false;
     function applyPar(){
@@ -415,7 +403,7 @@
       var vh = innerHeight;
       pels.forEach(function(el){
         var r = el.getBoundingClientRect();
-        var prog = (r.top + r.height / 2 - vh / 2) / vh;   // ~ -0.6..0.6 across viewport
+        var prog = (r.top + r.height / 2 - vh / 2) / vh;
         var sp = parseFloat(el.getAttribute('data-par'));
         el.style.transform = 'translate3d(0,' + (prog * sp).toFixed(1) + 'px,0)';
       });
