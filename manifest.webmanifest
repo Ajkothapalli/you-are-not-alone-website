@@ -1,0 +1,16 @@
+{
+  "name": "soulyap — anonymous confessions",
+  "short_name": "soulyap",
+  "description": "Say what you can't say out loud. Release one true thing anonymously and get matched to the one person who felt it too.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E0C13",
+  "theme_color": "#0E0C13",
+  "icons": [
+    { "src": "assets/favicon.png",         "sizes": "196x196",  "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-192.png",         "sizes": "192x192",  "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png",         "sizes": "512x512",  "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512-maskable.png","sizes": "512x512",  "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/logo.png",             "sizes": "1024x1024","type": "image/png", "purpose": "any" }
+  ]
+}
