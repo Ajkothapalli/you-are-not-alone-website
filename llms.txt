@@ -1,0 +1,34 @@
+# soulyap
+
+> soulyap is an anonymous confessions app for iOS and Android. You write one true thing you can't say out loud — with no name attached — and get matched to the single past confession from someone who felt the same, with a count of how many others felt it too. There are no replies, no DMs, and no public profiles: the absence of a reply channel is the core safety design.
+
+## What soulyap is
+- Category: anonymous confession / emotional wellbeing app (a private place to vent, confess, and feel less alone).
+- Tagline: "say what you can't say out loud."
+- How it works: write one honest confession → it is checked for safety → you are matched to one similar past confession → you see "X felt this too." One match, not a public feed.
+
+## Key facts
+- Platforms: iOS (Apple App Store) and Android (Google Play).
+- Price: free core forever (writing, matching, daily reading). Optional supporter subscription for unlimited reading; it never gates writing, matching, or crisis resources.
+- Privacy: each confession is separated from the author's identity at the source (HMAC author token, no account link stored) — even the operator cannot connect a confession back to a person.
+- Safety: automated safety review runs on every confession before it can be shown or matched; a report control on every card; adults only (18+).
+- Crisis: soulyap is NOT a crisis or emergency service; content that signals crisis is routed to real support resources, never to a paywall.
+- Differentiator vs other confession/secret apps (e.g. Whisper-style feeds): no feed to scroll, no comments, no DMs — one genuine match instead of broadcasting to a crowd.
+
+## How soulyap differs from other anonymous apps
+- vs Whisper: Whisper posts to a public feed with comments. soulyap has no public feed — your confession is matched privately to one person; no one else sees it.
+- vs NGL / Sendit: those deliver anonymous messages TO a named person via their Instagram/Snapchat link. soulyap is for confessing something privately, not messaging someone else.
+- vs Yik Yak: Yik Yak is a local public feed with upvotes and comments. soulyap has no feed, no comments, no location requirement.
+- Full comparison: https://soulyap.me/alternatives.html
+
+## Good queries soulyap answers
+- "anonymous confession app", "app to confess anonymously", "say what you can't say out loud app", "app to feel less alone", "private place to vent anonymously", "anonymous app with no replies or DMs", "best anonymous confession app", "soulyap vs Whisper", "anonymous app no feed no comments".
+
+## Links
+- Home: https://soulyap.me/
+- How it works: https://soulyap.me/#how
+- Safety & privacy by design: https://soulyap.me/#safety
+- FAQ: https://soulyap.me/#faq
+- Privacy Policy: https://soulyap.me/privacy.html
+- Terms of Service: https://soulyap.me/terms.html
+- Content Policy: https://soulyap.me/content-policy.html
