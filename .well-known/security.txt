@@ -1,0 +1,13 @@
+Contact: mailto:security@soulyap.me
+Expires: 2027-07-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://soulyap.me/.well-known/security.txt
+
+# Please disclose vulnerabilities responsibly. We will acknowledge receipt within
+# 48 hours and aim to fix critical issues within 7 days.
+# We do not offer a monetary bounty at this stage, but we will credit researchers
+# who report valid issues (if desired).
+#
+# Out of scope: DDoS, social engineering, physical attacks.
+# In scope: authentication bypasses, identity-separation breaks (CLAUDE.md §3),
+#   moderation/safety pipeline bypasses, data exposure, RLS bypasses.
