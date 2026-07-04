@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Delete Account — soulyap</title>
+<meta name="theme-color" content="#0E0C13" />
+<link rel="icon" href="assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital@0;1&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="legal.css" />
+<style>
+  .card{background:#1C1828;border:1px solid rgba(243,238,232,0.10);border-radius:18px;padding:32px;margin:32px 0}
+  .field-label{font-size:12px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:#A29CAA;margin-bottom:8px}
+  input,select,textarea{width:100%;background:#0E0C13;border:1px solid rgba(243,238,232,0.14);border-radius:10px;color:#F3EEE8;font-family:'Inter',system-ui,sans-serif;font-size:15px;padding:12px 14px;margin-bottom:20px;outline:none;transition:border-color .15s}
+  input:focus,select:focus,textarea:focus{border-color:rgba(156,139,246,0.60)}
+  select option{background:#1C1828}
+  textarea{resize:vertical;min-height:90px}
+  .btn{display:block;width:100%;background:#9C8BF6;color:#0E0C13;font-family:'Inter',system-ui,sans-serif;font-weight:600;font-size:15px;border:none;border-radius:999px;padding:14px;cursor:pointer;transition:opacity .15s;margin-top:4px}
+  .btn:hover{opacity:.85}
+  .note{font-size:13.5px;color:#A29CAA;line-height:1.6;margin-top:16px}
+  .success{display:none;background:rgba(156,139,246,0.10);border:1px solid rgba(156,139,246,0.30);border-radius:12px;padding:20px 24px;margin-top:20px;color:#F3EEE8;font-size:15px;line-height:1.6}
+  .tag{display:inline-block;font-family:'Inter',system-ui,sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9C8BF6;border:1px solid rgba(243,238,232,0.10);border-radius:999px;padding:5px 12px;margin-bottom:28px}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav-in"><a href="index.html" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit"><img src="assets/logo.png" alt="" /><span>soulyap</span></a></div></nav>
+<main class="wrap">
+  <h1>Delete Account</h1>
+  <p class="upd">Processed within 30 days</p>
+  <span class="tag">Data deletion</span>
+
+  <p>Submitting this form permanently deletes your account, confessions, reading history, and preferences from our servers. This cannot be undone.</p>
+  <p>Purchase records are retained by the App Store or Google Play for billing purposes. CSAM reports and crisis records may be retained where the law requires.</p>
+
+  <div class="card">
+    <form id="deleteForm">
+      <div class="field-label">Email address used to sign in *</div>
+      <input type="email" id="email" placeholder="you@example.com" required />
+
+      <div class="field-label">Reason (optional)</div>
+      <select id="reason">
+        <option value="">Select a reason…</option>
+        <option value="privacy">Privacy concerns</option>
+        <option value="no_longer_use">No longer using the app</option>
+        <option value="switching">Switching to another service</option>
+        <option value="other">Other</option>
+      </select>
+
+      <div class="field-label">Additional notes (optional)</div>
+      <textarea id="notes" placeholder="Anything else you'd like us to know…"></textarea>
+
+      <button type="submit" class="btn">Request account deletion</button>
+
+      <p class="note">We will send a confirmation to the email address above within 2 business days, and complete the deletion within 30 days. If you do not receive a confirmation, email us at <a href="mailto:nani.ajay@gmail.com">nani.ajay@gmail.com</a>.</p>
+    </form>
+
+    <div class="success" id="successMsg">
+      ✓ &nbsp;Your deletion request has been received. Check your inbox for a confirmation email within 2 business days.
+    </div>
+  </div>
+
+  <footer><a class="back" href="index.html">← back to home</a></footer>
+</main>
+
+<script>
+  document.getElementById('deleteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email   = document.getElementById('email').value;
+    const reason  = document.getElementById('reason').value;
+    const notes   = document.getElementById('notes').value;
+    const subject = encodeURIComponent('Account Deletion Request — soulyap');
+    const body    = encodeURIComponent(
+      'Email: ' + email + '\n' +
+      'Reason: ' + (reason || 'Not specified') + '\n' +
+      'Notes: '  + (notes  || 'None') + '\n\n' +
+      '— submitted via soulyap.me/delete-account'
+    );
+    window.location.href = 'mailto:nani.ajay@gmail.com?subject=' + subject + '&body=' + body;
+    document.getElementById('deleteForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  });
+</script>
+</body>
+</html>
