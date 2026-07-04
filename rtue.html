@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>soulyap — RTUE moments (one per scenario)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--ink:#0E0C13;--paper:#F3EEE8;--dim:#A29CAA;--warm:#F5996E;--cool:#9C8BF6;--pink:#FB7185;--gold:#FBBF24;
+        --serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#08070b;color:var(--paper);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:26px 0}
+  .note{font-size:13px;color:var(--dim);max-width:660px;text-align:center;padding:0 20px}
+  .note b{color:var(--paper)}
+  .rail{display:flex;gap:22px;overflow-x:auto;max-width:100vw;padding:12px 28px 8px;align-items:flex-start}
+  .col{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;width:248px}
+  .stage{width:248px;aspect-ratio:248/510;border-radius:32px;position:relative;overflow:hidden;background:var(--ink);
+         border:1px solid rgba(243,238,232,.07);box-shadow:0 22px 50px rgba(0,0,0,.5);
+         display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px 22px}
+  .stage::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 28%, var(--glow), transparent 60%)}
+  .inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;height:100%}
+  .logo{height:24px;width:auto;opacity:.95}
+  .kick{font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(243,238,232,.7);margin-top:12px}
+  .hi{font-family:var(--serif);font-style:italic;font-weight:500;font-size:23px;line-height:1.1;margin-top:6px}
+  .yours{width:100%;background:#0B0910;border:1px solid rgba(243,238,232,.1);border-radius:15px;padding:12px 13px;text-align:left;margin-top:14px}
+  .yours .lab{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--warm);margin-bottom:4px}
+  .yours p{font-family:var(--serif);font-size:12px;line-height:1.4;margin:0}
+  .moment{margin-top:14px;display:flex;flex-direction:column;align-items:center;min-height:78px;justify-content:center}
+  .count{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1;background:linear-gradient(105deg,var(--gold),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .big{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.14;color:var(--paper)}
+  .feltlabel{font-weight:600;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);margin-top:6px}
+  .stat{margin-top:11px;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:11px;color:var(--warm);background:rgba(245,153,110,.12);border:1px solid rgba(245,153,110,.38);border-radius:999px;padding:5px 11px}
+  .stat .h{display:inline-block;animation:beat 2.3s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}}
+  .sub{font-size:11.5px;line-height:1.5;color:rgba(243,238,232,.85);margin-top:12px;max-width:26ch}
+  .spacer{flex:1}
+  .cta{font-family:var(--sans);font-weight:600;font-size:12.5px;color:#3A0A14;background:linear-gradient(105deg,var(--gold),var(--pink));border:none;border-radius:999px;padding:11px 0;width:100%}
+  .ghost{font-size:11.5px;color:rgba(243,238,232,.7);margin-top:9px;background:none;border:none}
+  .cap{text-align:center;max-width:230px}
+  .cap b{font-family:var(--sans);font-weight:600;font-size:13px;color:var(--paper)}
+  .cap span{display:block;font-size:11.5px;color:var(--dim);line-height:1.45;margin-top:3px}
+</style>
+</head>
+<body>
+  <p class="note">Each card is a <b>separate scenario</b> the orchestrator may show. In the real app the user sees <b>exactly one</b> — picked from their own data. <b>No tabs, ever.</b> Note how zero &amp; low never shame.</p>
+  <div class="rail" id="rail"></div>
+<script>
+  const CONF = '"i smile all day so nobody worries. tonight i cried in the car before coming in."';
+  const STATES = [
+    { name:'Not yet felt', desc:'0 — never shown as a zero; reframed to the journey + giving', glow:'rgba(156,139,246,.32)',
+      hi:'it’s still travelling', mode:'big', big:'out there,<br>finding its person',
+      sub:'you said the thing — that took more than most manage. someone will feel it; it just hasn’t reached them yet.',
+      p:'read someone else’s', g:'say something new' },
+    { name:'One', desc:'1 — framed as connection, not smallness', glow:'rgba(245,153,110,.38)',
+      hi:'someone felt this', mode:'count', count:1, label:'person felt exactly this',
+      sub:'one stranger, somewhere, a little less alone because you spoke. that’s the whole point.',
+      p:'say something new', g:'read someone’s' },
+    { name:'A few (2–9)', desc:'plural warmth — never “only 6”', glow:'rgba(245,153,110,.38)',
+      hi:'you were felt', mode:'count', count:6, label:'felt this too', stat:'+4 since you left',
+      sub:'six strangers, less alone because you didn’t stay silent.',
+      p:'say something new', g:'just sit with this' },
+    { name:'Growing', desc:'gained since last visit', glow:'rgba(245,153,110,.42)',
+      hi:'you were heard', mode:'count', from:1224, count:1247, label:'felt this too', stat:'+23 while you were away',
+      sub:'you’re still not the only one.', p:'say something new', g:'just sit with this' },
+    { name:'Milestone', desc:'crossed 100 / 500 / 1k', glow:'rgba(251,191,36,.4)',
+      hi:'a thousand people', mode:'count', from:970, count:1000, label:'have felt this', stat:'a milestone ✨',
+      sub:'a thousand strangers, less alone because you spoke once.', p:'share the card', g:'not now' },
+  ];
+  function countUp(el,from,to){const t0=performance.now(),dur=1200;
+    (function tick(t){const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);
+      el.textContent=Math.round(from+(to-from)*e).toLocaleString();if(k<1)requestAnimationFrame(tick);})(performance.now());}
+  const rail=document.getElementById('rail');
+  STATES.forEach(s=>{
+    const showCount=s.mode==='count';
+    const col=document.createElement('div');col.className='col';
+    col.innerHTML=`
+      <div class="stage" style="--glow:${s.glow}"><div class="inner">
+        <img class="logo" src="assets/logo-transparent.png" alt="soulyap" />
+        <div class="kick">welcome back</div>
+        <div class="hi">${s.hi}</div>
+        <div class="yours"><div class="lab">you wrote</div><p>${CONF}</p></div>
+        <div class="moment">
+          ${showCount?`<div class="count">0</div><div class="feltlabel">${s.label}</div>`:`<div class="big">${s.big}</div>`}
+          ${s.stat?`<div class="stat"><span class="h">♥</span>${s.stat}</div>`:''}
+        </div>
+        <div class="sub">${s.sub}</div>
+        <div class="spacer"></div>
+        <button class="cta">${s.p}</button>
+        <button class="ghost">${s.g}</button>
+      </div></div>
+      <div class="cap"><b>${s.name}</b><span>${s.desc}</span></div>`;
+    rail.appendChild(col);
+    if(showCount){countUp(col.querySelector('.count'), s.from??s.count, s.count);}
+  });
+</script>
+</body>
+</html>

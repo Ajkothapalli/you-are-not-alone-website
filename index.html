@@ -83,7 +83,34 @@
   .reassure{font-family:var(--disp); font-weight:600; margin-top:22px; font-size:13px; opacity:.92; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap}
   .dot{width:4px;height:4px;border-radius:50%;background:currentColor;display:inline-block;opacity:.7}
 
-  .fe{position:absolute; z-index:1; pointer-events:none; font-size:clamp(34px,4.4vw,58px); line-height:1; filter:drop-shadow(0 12px 18px rgba(0,0,0,.3)); will-change:transform,translate}
+  .fe{position:absolute; z-index:1; pointer-events:none; font-size:clamp(34px,4.4vw,58px); line-height:1; filter:drop-shadow(0 12px 18px rgba(0,0,0,.3)); will-change:transform,translate; scale:1; transition:scale .45s cubic-bezier(.3,2.2,.45,.9), filter .3s ease}
+  @media(hover:hover) and (pointer:fine){
+    .fe{pointer-events:auto; cursor:default}
+    .fe:hover{scale:1.18; filter:drop-shadow(0 18px 26px rgba(0,0,0,.4)) brightness(1.1); z-index:3}
+  }
+  /* per-emoji mood reactions */
+  .fe .em{display:inline-block; font-style:normal; transition:transform .65s ease, filter .65s ease}
+  .fe[data-mood=sad]:hover .em{transform:translateY(9px) rotate(13deg); filter:saturate(.7) brightness(.9)}   /* head hangs */
+  .fe[data-mood=cry]:hover .em{animation:quiver .4s ease-in-out infinite}
+  .fe[data-mood=tearful]:hover .em{animation:tremble .16s ease-in-out infinite}
+  .fe[data-mood=hug]:hover .em{animation:hugw .9s cubic-bezier(.34,1.56,.64,1)}
+  .fe[data-mood=heart]:hover .em{animation:beat 1.1s ease-in-out infinite; transform-origin:50% 62%}
+  @keyframes quiver{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+  @keyframes tremble{0%,100%{transform:translateX(-1.4px) rotate(-1.4deg)}50%{transform:translateX(1.4px) rotate(1.4deg)}}
+  @keyframes hugw{0%{transform:scale(1)}35%{transform:scale(1.26) rotate(-7deg)}65%{transform:scale(1.2) rotate(6deg)}100%{transform:scale(1.1)}}
+  @keyframes beat{0%,100%{transform:scale(1)}18%{transform:scale(1.3)}36%{transform:scale(1.05)}52%{transform:scale(1.24)}70%{transform:scale(1)}}
+  .tear{position:absolute; font-size:.34em; pointer-events:none; animation:tearFall .95s ease-in forwards}
+  @keyframes tearFall{0%{opacity:0; transform:translateY(0) scale(.7)}14%{opacity:1}100%{opacity:0; transform:translateY(80px) scale(1.05)}}
+  .mheart{position:absolute; font-size:.3em; pointer-events:none; animation:mh .85s ease-out forwards}
+  @keyframes mh{from{opacity:1; transform:translate(0,0) scale(.7)}to{opacity:0; transform:translate(var(--hx,0),-48px) scale(1.2) rotate(var(--hr,0deg))}}
+  .dots{position:absolute; left:50%; top:42%; translate:-50% -50%; display:flex; gap:.08em; font-size:.4em; font-weight:800; color:#4A4460; opacity:0; transition:opacity .25s; pointer-events:none}
+  .fe[data-mood=think]:hover .dots{opacity:1}
+  .dots b{animation:dotb 1.1s infinite}
+  .dots b:nth-child(2){animation-delay:.18s} .dots b:nth-child(3){animation-delay:.36s}
+  @keyframes dotb{0%,60%,100%{opacity:.25; transform:translateY(0)}30%{opacity:1; transform:translateY(-3px)}}
+  .bub{position:absolute; top:-14px; right:-18px; background:#fff; color:#2b2b33; border-radius:12px; padding:2px 8px; font-size:.3em; font-weight:800; line-height:1.3; opacity:0; scale:.4; transition:opacity .25s, scale .35s cubic-bezier(.34,1.8,.5,1); box-shadow:0 4px 10px rgba(0,0,0,.25); pointer-events:none}
+  .bub::after{content:''; position:absolute; bottom:-4px; left:9px; width:9px; height:9px; background:#fff; transform:rotate(45deg)}
+  .fe[data-mood=mute]:hover .bub{opacity:1; scale:1}
   .e1{top:13%; left:7%; transform:rotate(-10deg); animation:bobA 8s ease-in-out infinite}
   .e2{top:17%; right:8%; transform:rotate(11deg); animation:bobB 9.5s ease-in-out infinite}
   .e3{top:46%; left:4%; transform:rotate(6deg); animation:bobB 11s ease-in-out infinite}
@@ -174,11 +201,76 @@
   .fade{opacity:0; transition:opacity .7s ease}
   .fade.in{opacity:1}
 
+  /* ---------- delight layer ---------- */
+  /* scroll progress */
+  #prog{position:fixed; top:0; left:0; right:0; height:3px; z-index:70; background:linear-gradient(90deg,var(--gold),var(--pink),var(--cool)); transform:scaleX(0); transform-origin:0 50%; pointer-events:none}
+
+  /* film grain */
+  body::after{content:''; position:fixed; inset:0; z-index:95; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size:180px}
+
+  /* hero entrance choreography */
+  .wm{display:inline-block; overflow:hidden; vertical-align:bottom; padding:.12em .16em .14em; margin:-.12em -.16em -.14em}
+  .w{display:inline-block; transform:translateY(120%); transition:transform .8s cubic-bezier(.16,1,.3,1)}
+  body.hi .w{transform:none}
+  .wm:nth-child(1) .w{transition-delay:.15s} .wm:nth-child(2) .w{transition-delay:.22s}
+  .wm:nth-child(3) .w{transition-delay:.29s} .wm:nth-child(4) .w{transition-delay:.36s}
+  .wm:nth-child(5) .w{transition-delay:.43s} .wm:nth-child(6) .w{transition-delay:.50s}
+  .wm:nth-child(7) .w{transition-delay:.57s}
+  body.hi .hl{animation:hlpop .55s cubic-bezier(.34,1.56,.64,1) .8s backwards}
+  @keyframes hlpop{0%{transform:rotate(-14deg) scale(.3)}62%{transform:rotate(2deg) scale(1.1)}100%{transform:rotate(-2deg) scale(1)}}
+  .hi-item{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1)}
+  body.hi .hi-item{opacity:1; transform:none}
+  .hi-d1{transition-delay:.05s} .hi-d2{transition-delay:.85s} .hi-d3{transition-delay:1s} .hi-d4{transition-delay:1.15s}
+  .scroll-cue{opacity:0; transition:opacity .5s ease 1.5s}
+  body.hi .scroll-cue{opacity:1}
+  .scroll-cue.gone{opacity:0!important; transition:opacity .35s ease}
+
+  /* rotating sheen on gradient cards */
+  .sheen{position:absolute; inset:-60%; z-index:0; pointer-events:none; mix-blend-mode:soft-light; opacity:.55;
+    background:conic-gradient(from 10deg, transparent 0 42%, rgba(255,255,255,.35) 50%, transparent 58% 100%);
+    animation:sheenspin 22s linear infinite}
+  @keyframes sheenspin{to{transform:rotate(1turn)}}
+
+  /* cursor spotlight on hero card */
+  .hero-card::after{content:''; position:absolute; inset:0; z-index:1; pointer-events:none; mix-blend-mode:soft-light; opacity:0; transition:opacity .4s ease;
+    background:radial-gradient(480px circle at var(--mx,50%) var(--my,40%), rgba(255,255,255,.9), transparent 62%)}
+  .hero-card.hov::after{opacity:.6}
+
+  /* confession ticker */
+  .ticker{overflow:hidden; padding:30px 0 34px; border-bottom:2px solid var(--line)}
+  .ticker .eyebrow{text-align:center; color:var(--dim); margin-bottom:18px}
+  .trow{display:flex; gap:14px; width:max-content; padding:8px 0; animation:marq var(--dur,46s) linear infinite}
+  .trow.rev{animation-name:marqr}
+  .trow:hover{animation-play-state:paused}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  @keyframes marqr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  .tq{flex:none; display:flex; align-items:center; gap:12px; background:var(--surface); border:2px solid rgba(243,238,232,.25); border-radius:999px; padding:10px 18px; transform:rotate(var(--r,0deg))}
+  .tq:nth-child(odd){--r:.8deg} .tq:nth-child(even){--r:-.8deg}
+  .tq q{font-family:'Fraunces',Georgia,serif; font-size:15px; color:var(--paper); quotes:'"' '"'}
+  .tq b{font-family:var(--disp); font-weight:700; font-size:11px; color:var(--warm); letter-spacing:.06em; white-space:nowrap}
+
+  /* felt-count heart burst */
+  .cfelt{cursor:pointer; user-select:none; transition:transform .18s cubic-bezier(.34,1.56,.64,1)}
+  .cfelt.pop{transform:scale(1.18)}
+  .hb{position:absolute; z-index:5; font-size:15px; pointer-events:none; color:var(--you,#F5996E); animation:heartup .9s ease-out forwards}
+  @keyframes heartup{from{opacity:1; transform:translate(0,0) scale(.6)} to{opacity:0; transform:translate(var(--dx,0),-72px) scale(1.3) rotate(var(--dr,0deg))}}
+
+  /* typewriter in final CTA */
+  .typeline{font-family:'Fraunces',Georgia,serif; font-style:italic; font-size:clamp(16px,2.4vw,22px); min-height:1.7em; opacity:.95; position:relative; z-index:2}
+  .tcaret{display:inline-block; width:2px; height:1.05em; background:var(--paper); margin-left:3px; vertical-align:-.15em; animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
   @media(max-width:860px){ .steps{grid-template-columns:1fr} .pillars{grid-template-columns:1fr} }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important; scroll-behavior:auto}
     .reveal,.fade{opacity:1; transform:none; transition:none}
     [data-par]{transform:none!important}
+    .w,.hi-item,.scroll-cue{opacity:1!important; transform:none!important; transition:none!important}
+    .sheen,.hero-card::after,body::after{display:none}
+    .trow{animation:none!important; flex-wrap:wrap; width:auto; justify-content:center}
+    .tcaret{display:none}
   }
 </style>
 <!-- SEO: structured data. Replace the App Store id + confirm the Play package when live. -->
@@ -205,6 +297,7 @@
 <link rel="alternate" type="text/plain" title="LLM-readable site summary" href="/llms.txt" />
 </head>
 <body id="top">
+<div id="prog" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <linearGradient id="eb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A3B22" stop-opacity="0"/><stop offset="1" stop-color="#8A3B22" stop-opacity="1"/></linearGradient>
@@ -235,7 +328,8 @@
 
 <!-- ===================== HERO (inset card) ===================== -->
 <header class="hero-wrap">
-  <div class="hero-card">
+  <div class="hero-card" id="heroCard">
+    <div class="sheen" aria-hidden="true"></div>
     <span class="fe e1" aria-hidden="true">&#129303;</span>
     <span class="fe e2" aria-hidden="true">&#128546;</span>
     <span class="fe e3" aria-hidden="true">&#128173;</span>
@@ -245,10 +339,10 @@
     <span class="fe e7" aria-hidden="true">&#129401;</span>
 
     <div class="hero-inner">
-      <p class="eyebrow">anonymous · adults only · free</p>
-      <h1 class="huge" style="margin-top:20px">say what you <span class="hl">can't</span> say out loud</h1>
-      <p class="lead">Release one true thing — with no name attached — and meet the one person who felt it too.</p>
-      <div class="stores">
+      <p class="eyebrow hi-item hi-d1">anonymous · adults only · free</p>
+      <h1 class="huge" style="margin-top:20px"><span class="wm"><span class="w">say</span></span> <span class="wm"><span class="w">what</span></span> <span class="wm"><span class="w">you</span></span> <span class="wm"><span class="w"><span class="hl">can't</span></span></span> <span class="wm"><span class="w">say</span></span> <span class="wm"><span class="w">out</span></span> <span class="wm"><span class="w">loud</span></span></h1>
+      <p class="lead hi-item hi-d2">Release one true thing — with no name attached — and meet the one person who felt it too.</p>
+      <div class="stores hi-item hi-d3">
         <a class="store" href="#" aria-label="Download on the App Store">
           <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.46 2.22-1.2 3.02-.78.85-2.06 1.5-3.12 1.42-.13-1.12.42-2.3 1.13-3.06.79-.85 2.16-1.48 3.19-1.5.02.04.02.08 0 .12zM20.7 17.1c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-.99-4.03-.98-2.09.01-2.53.99-4.07.97-1.73-.01-3.05-1.78-4.04-3.35C-.04 15.9-.3 11.06 1.27 8.46c1.05-1.74 2.71-2.76 4.27-2.76 1.59 0 2.59 1 3.9 1 1.27 0 2.05-1 3.89-1 1.39 0 2.86.76 3.91 2.07-3.44 1.88-2.88 6.79.46 8.33z"/></svg>
           <span><small>Download on the</small><strong>App Store</strong></span>
@@ -258,7 +352,7 @@
           <span><small>GET IT ON</small><strong>Google Play</strong></span>
         </a>
       </div>
-      <p class="reassure">No replies, ever <span class="dot"></span> never tied to you <span class="dot"></span> crisis support, always free</p>
+      <p class="reassure hi-item hi-d4">No replies, ever <span class="dot"></span> never tied to you <span class="dot"></span> crisis support, always free</p>
     </div>
     <a class="scroll-cue" href="#how" aria-label="Scroll to learn more"><span>scroll</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
   </div>
@@ -274,6 +368,13 @@
     <span>Adults only (18+)</span>
   </div>
 </div>
+
+<!-- ===================== CONFESSION TICKER ===================== -->
+<section class="ticker" aria-label="Things people finally said on soulyap">
+  <p class="eyebrow">said on soulyap</p>
+  <div class="trow" id="trow1" style="--dur:52s"></div>
+  <div class="trow rev" id="trow2" style="--dur:64s"></div>
+</section>
 
 <!-- ===================== HOW IT WORKS ===================== -->
 <section class="block" id="how">
@@ -401,8 +502,10 @@
 <!-- ===================== FINAL CTA (inset card) ===================== -->
 <section class="final-wrap" id="get">
   <div class="final-card reveal">
-    <h2 class="huge">say the <span class="hl" style="background:var(--cool)">thing</span></h2>
-    <p class="lead" style="margin-top:24px">It's waiting. So is the person who felt it too.</p>
+    <div class="sheen" aria-hidden="true"></div>
+    <p class="typeline" aria-hidden="true"><span id="tw"></span><span class="tcaret"></span></p>
+    <h2 class="huge" style="position:relative;z-index:2">say the <span class="hl" style="background:var(--cool)">thing</span></h2>
+    <p class="lead" style="margin-top:24px;position:relative;z-index:2">It's waiting. So is the person who felt it too.</p>
     <div class="stores">
       <a class="store" href="#" aria-label="Download on the App Store">
         <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.46 2.22-1.2 3.02-.78.85-2.06 1.5-3.12 1.42-.13-1.12.42-2.3 1.13-3.06.79-.85 2.16-1.48 3.19-1.5.02.04.02.08 0 .12zM20.7 17.1c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-.99-4.03-.98-2.09.01-2.53.99-4.07.97-1.73-.01-3.05-1.78-4.04-3.35C-.04 15.9-.3 11.06 1.27 8.46c1.05-1.74 2.71-2.76 4.27-2.76 1.59 0 2.59 1 3.9 1 1.27 0 2.05-1 3.89-1 1.39 0 2.86.76 3.91 2.07-3.44 1.88-2.88 6.79.46 8.33z"/></svg>
@@ -447,36 +550,263 @@
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
-  var nav = document.getElementById('nav');
-  addEventListener('scroll', function(){ nav.classList.toggle('scrolled', scrollY > 24); }, {passive:true});
 
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce  = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine    = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var nav     = document.getElementById('nav');
+  var prog    = document.getElementById('prog');
+  var cue     = document.querySelector('.scroll-cue');
+  var docEl   = document.documentElement;
+
+  addEventListener('scroll', function(){
+    var y = scrollY;
+    nav.classList.toggle('scrolled', y > 24);
+    if (cue) cue.classList.toggle('gone', y > 60);
+    var max = docEl.scrollHeight - innerHeight;
+    prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+  }, {passive:true});
+
+  /* ---------- confession ticker ---------- */
+  var T1 = [
+    ['some mornings the hardest thing i do is put both feet on the floor.', '842 felt this'],
+    ['everyone thinks i’m the happy one 😭', '1,140 felt this'],
+    ['functioning and okay are not the same thing.', '1,290 felt this'],
+    ['i’ve never felt more alone than in a full room.', '1,530 felt this'],
+    ['we text ‘miss u’ and never make a plan 💀', '700 felt this'],
+    ['told my therapist i was ‘a little stressed’ lol.', '671 felt this'],
+    ['i still draft texts i’ll never send 🥲', '1,120 felt this']
+  ];
+  var T2 = [
+    ['my mum’s ‘did you eat?’ is her ‘i love you.’', '1,340 felt this'],
+    ['i miss who i used to be before everyone needed me.', '1,094 felt this'],
+    ['i answered the email i’d been scared of for two weeks.', '760 felt this'],
+    ['the first time someone said ‘me too’, i cried ❤️', '1,455 felt this'],
+    ['i’m not sad exactly. just tired in a way sleep doesn’t fix.', '870 felt this'],
+    ['starting the meds felt like finally putting something down.', '545 felt this'],
+    ['i think i’m getting better. saying it here first.', '430 felt this']
+  ];
+  function fillRow(id, items){
+    var row = document.getElementById(id);
+    if (!row) return;
+    function half(hidden){
+      var frag = document.createDocumentFragment();
+      items.forEach(function(it){
+        var d = document.createElement('div');
+        d.className = 'tq';
+        if (hidden) d.setAttribute('aria-hidden', 'true');
+        d.innerHTML = '<q></q><b></b>';
+        d.querySelector('q').textContent = it[0];
+        d.querySelector('b').textContent = it[1];
+        frag.appendChild(d);
+      });
+      return frag;
+    }
+    row.appendChild(half(false));
+    if (!reduce) row.appendChild(half(true)); // duplicate for seamless loop
+  }
+  fillRow('trow1', T1);
+  fillRow('trow2', T2);
+
+  /* ---------- emoji moods (wrap glyph so reactions don't fight the bob) ---------- */
+  var MOODS = {e1:'hug', e2:'cry', e3:'think', e4:'heart', e5:'sad', e6:'mute', e7:'tearful'};
+  document.querySelectorAll('.fe').forEach(function(f){
+    var key = Array.prototype.find.call(f.classList, function(c){ return MOODS[c]; });
+    if (!key) return;
+    f.dataset.mood = MOODS[key];
+    var em = document.createElement('i');
+    em.className = 'em';
+    em.textContent = f.textContent.trim();
+    f.textContent = '';
+    f.appendChild(em);
+    if (f.dataset.mood === 'think'){
+      var d = document.createElement('span');
+      d.className = 'dots'; d.setAttribute('aria-hidden','true');
+      d.innerHTML = '<b>.</b><b>.</b><b>.</b>';
+      f.appendChild(d);
+    }
+    if (f.dataset.mood === 'mute'){
+      var b = document.createElement('span');
+      b.className = 'bub'; b.setAttribute('aria-hidden','true');
+      b.textContent = '…';
+      f.appendChild(b);
+    }
+  });
+
+  /* ---------- reveals (staggered) + count-ups ---------- */
   var revealEls = document.querySelectorAll('.reveal, .fade');
+  document.querySelectorAll('.steps, .pillars, .faq-list, .ac-grid').forEach(function(c){
+    Array.prototype.forEach.call(c.children, function(el, i){
+      el.style.transitionDelay = (i * 90) + 'ms';
+    });
+  });
+
+  function countUp(el){
+    var m = el.textContent.match(/^([\d,]+)([\s\S]*)$/);
+    if (!m) return;
+    var target = parseInt(m[1].replace(/,/g, ''), 10), suffix = m[2];
+    var t0 = performance.now(), dur = 1400;
+    (function tick(t){
+      var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(target * e).toLocaleString('en-US') + suffix;
+      if (k < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
   if (reduce) {
     revealEls.forEach(function(el){ el.classList.add('in'); });
+    document.body.classList.add('hi');
+    var tw0 = document.getElementById('tw');
+    if (tw0) tw0.textContent = 'i never told anyone this…';
   } else {
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('.cfelt').forEach(countUp);
+        io.unobserve(e.target);
+        setTimeout(function(){ e.target.style.transitionDelay = ''; }, 1400);
+      });
     }, {threshold:.16});
     revealEls.forEach(function(el){ io.observe(el); });
 
+    /* hero entrance */
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('hi'); }); });
+
+    /* parallax + tilt composed into one transform */
     var pels = document.querySelectorAll('[data-par]');
+    function setT(el){
+      el.style.transform = 'translate3d(0,' + (el._py || 0) + 'px,0)' +
+        (fine ? ' perspective(900px) rotateX(' + (el._rx || 0) + 'deg) rotateY(' + (el._ry || 0) + 'deg)' : '');
+    }
     var ticking = false;
     function applyPar(){
       ticking = false;
       var vh = innerHeight;
       pels.forEach(function(el){
         var r = el.getBoundingClientRect();
-        var prog = (r.top + r.height / 2 - vh / 2) / vh;
-        var sp = parseFloat(el.getAttribute('data-par'));
-        el.style.transform = 'translate3d(0,' + (prog * sp).toFixed(1) + 'px,0)';
+        el._py = +(((r.top + r.height / 2 - vh / 2) / vh) * parseFloat(el.getAttribute('data-par'))).toFixed(1);
+        setT(el);
       });
     }
     function onScroll(){ if (!ticking){ requestAnimationFrame(applyPar); ticking = true; } }
     addEventListener('scroll', onScroll, {passive:true});
     addEventListener('resize', onScroll);
     applyPar();
+
+    if (fine) {
+      document.querySelectorAll('.appcard').forEach(function(card){
+        card.addEventListener('pointermove', function(ev){
+          var r = card.getBoundingClientRect();
+          card._ry = +(((ev.clientX - r.left) / r.width - .5) * 7).toFixed(2);
+          card._rx = +(-((ev.clientY - r.top) / r.height - .5) * 7).toFixed(2);
+          setT(card);
+        });
+        card.addEventListener('pointerleave', function(){ card._rx = 0; card._ry = 0; setT(card); });
+      });
+
+      /* hero cursor spotlight + emoji drift */
+      var hc = document.getElementById('heroCard');
+      var fes = document.querySelectorAll('.fe');
+      hc.addEventListener('pointermove', function(ev){
+        var r = hc.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width, py = (ev.clientY - r.top) / r.height;
+        hc.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        hc.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+        hc.classList.add('hov');
+        fes.forEach(function(f, i){
+          var depth = .5 + (i % 3) * .45;
+          f.style.marginLeft = ((px - .5) * depth * 22).toFixed(1) + 'px';
+          f.style.marginTop  = ((py - .5) * depth * 16).toFixed(1) + 'px';
+        });
+      });
+      hc.addEventListener('pointerleave', function(){
+        hc.classList.remove('hov');
+        fes.forEach(function(f){ f.style.marginLeft = ''; f.style.marginTop = ''; });
+      });
+
+      /* mood particle emitters — tears fall, hearts float, while hovered */
+      var EMIT = {
+        cry:     {ch:'💧', cls:'tear',   pts:[[26,50],[58,50]], iv:700},
+        tearful: {ch:'💧', cls:'tear',   pts:[[42,54]],         iv:1300},
+        hug:     {ch:'🧡', cls:'mheart', pts:[[8,28],[72,24],[42,6]], iv:900},
+        heart:   {ch:'❤️', cls:'mheart', pts:[[18,16],[66,12]], iv:850}
+      };
+      fes.forEach(function(f){
+        var cfg = EMIT[f.dataset.mood];
+        if (!cfg) return;
+        function emit(){
+          cfg.pts.forEach(function(pt, i){
+            setTimeout(function(){
+              var s = document.createElement('span');
+              s.className = cfg.cls;
+              s.textContent = cfg.ch;
+              s.style.left = pt[0] + '%';
+              s.style.top  = pt[1] + '%';
+              if (cfg.cls === 'mheart'){
+                s.style.setProperty('--hx', (Math.random() * 48 - 24).toFixed(0) + 'px');
+                s.style.setProperty('--hr', (Math.random() * 40 - 20).toFixed(0) + 'deg');
+              }
+              f.appendChild(s);
+              s.addEventListener('animationend', function(){ s.remove(); });
+            }, i * 160);
+          });
+        }
+        f.addEventListener('pointerenter', function(){
+          emit();
+          f._iv = setInterval(emit, cfg.iv);
+        });
+        f.addEventListener('pointerleave', function(){ clearInterval(f._iv); });
+      });
+    }
+
+    /* typewriter in final CTA */
+    var PH = [
+      'i never told anyone this…',
+      'i’m tired of pretending…',
+      'i still think about it every day…',
+      'i miss them and i can’t say it…'
+    ];
+    var tw = document.getElementById('tw');
+    if (tw) (function(){
+      var pi = 0, ci = 0, del = false;
+      (function step(){
+        var p = PH[pi];
+        tw.textContent = p.slice(0, ci);
+        var wait;
+        if (!del && ci < p.length){ ci++; wait = 52; }
+        else if (!del){ del = true; wait = 1600; }
+        else if (ci > 0){ ci--; wait = 24; }
+        else { del = false; pi = (pi + 1) % PH.length; wait = 500; }
+        setTimeout(step, wait);
+      })();
+    })();
   }
+
+  /* ---------- heart burst on felt counts (all modes) ---------- */
+  document.querySelectorAll('.cfelt').forEach(function(pill){
+    pill.title = 'tap if you felt this';
+    pill.addEventListener('click', function(ev){
+      var m = pill.textContent.match(/^([\d,]+)([\s\S]*)$/);
+      if (m) pill.textContent = (parseInt(m[1].replace(/,/g, ''), 10) + 1).toLocaleString('en-US') + m[2];
+      pill.classList.add('pop');
+      setTimeout(function(){ pill.classList.remove('pop'); }, 220);
+      if (reduce) return;
+      var card = pill.closest('.appcard') || pill.parentElement;
+      var cr = card.getBoundingClientRect();
+      for (var i = 0; i < 7; i++){
+        var h = document.createElement('span');
+        h.className = 'hb';
+        h.textContent = '♥';
+        h.style.left = (ev.clientX - cr.left + (Math.random() * 26 - 13)) + 'px';
+        h.style.top  = (ev.clientY - cr.top - 6) + 'px';
+        h.style.setProperty('--dx', (Math.random() * 56 - 28).toFixed(0) + 'px');
+        h.style.setProperty('--dr', (Math.random() * 40 - 20).toFixed(0) + 'deg');
+        h.style.animationDelay = (i * 40) + 'ms';
+        card.appendChild(h);
+        h.addEventListener('animationend', function(e){ e.target.remove(); });
+      }
+    });
+  });
 </script>
 </body>
 </html>
