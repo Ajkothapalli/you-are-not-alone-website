@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="soulyap — Anonymous Confessions App" />
 <meta name="twitter:description" content="Say what you can't say out loud. Anonymous, safe, matched to the one person who felt it too. Free on iPhone & Android." />
 <meta name="twitter:image" content="https://soulyap.me/assets/logo.png" />
-<meta name="theme-color" content="#0E0C13" />
+<meta name="theme-color" content="#08121A" />
 <link rel="icon" href="assets/favicon.png" />
 <link rel="apple-touch-icon" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,16 +32,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#0E0C13; --surface:#18141F; --paper:#F3EEE8; --dim:#A29CAA;
-    --warm:#F5996E; --cool:#9C8BF6; --pink:#FB7185; --gold:#FBBF24; --mint:#7FE3B0;
+    --bg:#08121A; --surface:#0F1E28; --paper:#F3EEE8; --dim:#7A9EAD;
+    --warm:#F59E42; --cool:#22D3EE; --pink:#F472B6; --gold:#FBBF24; --mint:#34D399;
     --line:rgba(243,238,232,.14);
     --grad:
-      radial-gradient(circle at 20% 22%, #FFB84D 0%, transparent 46%),
-      radial-gradient(circle at 82% 16%, #A66BFF 0%, transparent 50%),
-      radial-gradient(circle at 78% 84%, #5B43D6 0%, transparent 56%),
-      radial-gradient(circle at 20% 86%, #FF6F61 0%, transparent 52%),
-      radial-gradient(circle at 50% 48%, #ED3F8C 0%, transparent 64%);
-    --grad-base:#C9358A;
+      radial-gradient(circle at 20% 22%, #0D3A48 0%, transparent 50%),
+      radial-gradient(circle at 80% 18%, #093048 0%, transparent 52%),
+      radial-gradient(circle at 75% 82%, #062030 0%, transparent 55%),
+      radial-gradient(circle at 22% 84%, #0A2838 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, #0C2030 0%, transparent 60%);
+    --grad-base:#061820;
     --disp:'Plus Jakarta Sans',system-ui,sans-serif; --sans:'Inter',system-ui,sans-serif;
     --maxw:1180px;
   }
@@ -54,7 +54,7 @@
 
   /* ---------- nav ---------- */
   nav{position:fixed; inset:0 0 auto 0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:14px 24px; transition:background .25s, border-color .25s; border-bottom:2.5px solid transparent; color:var(--paper)}
-  nav.scrolled{background:rgba(14,12,19,.82); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
+  nav.scrolled{background:rgba(8,18,26,.82); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
   .brand{display:flex; align-items:center; gap:10px; font-family:var(--disp); font-size:19px; font-weight:800}
   .logomark{display:flex; align-items:center}
   .logomark img{height:40px; width:auto; display:block}
@@ -150,13 +150,13 @@
   .step p{color:var(--dim); font-size:15px; font-weight:500}
 
   /* confessions — exact in-app card (waves + seam + serif voices) */
-  .said{background:#1C1828}
+  .said{background:#0A1C28}
   .ac-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px; max-width:1080px; margin:0 auto}
   @media(max-width:880px){ .ac-grid{grid-template-columns:1fr; max-width:380px} }
-  .appcard{position:relative; overflow:hidden; background:#0E0C13; border:1px solid rgba(243,238,232,.06); border-radius:26px; padding:30px; min-height:460px; display:flex; flex-direction:column; will-change:transform}
-  .appcard.ember{--you:#F5996E; --them:#FBBF24}
-  .appcard.twilight{--you:#9C8BF6; --them:#7FA0FF}
-  .appcard.rose{--you:#FB7185; --them:#A8407A}
+  .appcard{position:relative; overflow:hidden; background:#08121A; border:1px solid rgba(243,238,232,.06); border-radius:26px; padding:30px; min-height:460px; display:flex; flex-direction:column; will-change:transform}
+  .appcard.ember{--you:#F59E42; --them:#FBBF24}
+  .appcard.twilight{--you:#22D3EE; --them:#67E8F9}
+  .appcard.rose{--you:#F472B6; --them:#A8407A}
   .appcard .waves{position:absolute; inset:0; width:100%; height:100%; z-index:0}
   .appcard .cin{position:relative; z-index:1; display:flex; flex-direction:column; flex:1}
   .lab{font-family:var(--disp); font-weight:700; font-size:11px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:7px}
@@ -184,7 +184,7 @@
   .final-card .huge{font-size:clamp(42px,8vw,92px)}
 
   /* footer */
-  footer{color:#b9b3c0; padding:56px 0 40px; border-top:2px solid var(--line)}
+  footer{color:#7A9EAD; padding:56px 0 40px; border-top:2px solid var(--line)}
   .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
   .foot-brand{max-width:300px}
   .foot-brand .brand{color:var(--paper); margin-bottom:14px}
@@ -203,7 +203,7 @@
 
   /* ---------- delight layer ---------- */
   /* scroll progress */
-  #prog{position:fixed; top:0; left:0; right:0; height:3px; z-index:70; background:linear-gradient(90deg,var(--gold),var(--pink),var(--cool)); transform:scaleX(0); transform-origin:0 50%; pointer-events:none}
+  #prog{position:fixed; top:0; left:0; right:0; height:3px; z-index:70; background:linear-gradient(90deg,#0A7890,#18C8DC,#0D96B4); transform:scaleX(0); transform-origin:0 50%; pointer-events:none}
 
   /* film grain */
   body::after{content:''; position:fixed; inset:0; z-index:95; pointer-events:none; opacity:.05;
