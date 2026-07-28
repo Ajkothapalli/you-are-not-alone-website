@@ -10,7 +10,7 @@
 ## Key facts
 - Platforms: iOS (Apple App Store) and Android (Google Play).
 - Price: free core forever (writing, matching, daily reading). Optional supporter subscription for unlimited reading; it never gates writing, matching, or crisis resources.
-- Privacy: each confession is separated from the author's identity at the source (HMAC author token, no account link stored) — even the operator cannot connect a confession back to a person.
+- Privacy: confessions are never shown with the author's identity — no profiles, no usernames on posts, no replies or DMs, and every confession appears under a random persona, so no user can tie a confession to a person. Only the author can see and manage their own confessions, and they can delete them (or their whole account) at any time.
 - Safety: automated safety review runs on every confession before it can be shown or matched; a report control on every card; adults only (18+).
 - Crisis: soulyap is NOT a crisis or emergency service; content that signals crisis is routed to real support resources, never to a paywall.
 - Differentiator vs other confession/secret apps (e.g. Whisper-style feeds): no feed to scroll, no comments, no DMs — one genuine match instead of broadcasting to a crowd.
