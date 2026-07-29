@@ -50,13 +50,9 @@
   /* ---------- nav ---------- */
   nav{position:fixed; inset:0 0 auto 0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:14px 24px; transition:background .25s, border-color .25s; border-bottom:2.5px solid transparent; color:var(--paper)}
   nav.scrolled{background:rgba(8,18,26,.82); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
-  @keyframes logo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-  @keyframes logo-glow{0%,100%{filter:drop-shadow(0 0 0px transparent)}50%{filter:drop-shadow(0 0 8px rgba(245,158,66,.45))}}
-  .brand{display:flex; align-items:center; gap:12px; font-family:var(--disp); font-size:22px; font-weight:800; transition:opacity .18s}
-  .brand:hover{opacity:.88}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--disp); font-size:19px; font-weight:800}
   .logomark{display:flex; align-items:center}
-  .logomark img{height:52px; width:auto; display:block; animation:logo-float 3.2s ease-in-out infinite, logo-glow 3.2s ease-in-out infinite}
-  .brand:hover .logomark img{animation-play-state:paused; filter:drop-shadow(0 0 12px rgba(245,158,66,.6)); transform:translateY(-2px) scale(1.06); transition:transform .2s, filter .2s}
+  .logomark img{height:40px; width:auto; display:block}
   .nav-links{display:flex; align-items:center; gap:26px; font-family:var(--disp); font-weight:600}
   .nav-links a{font-size:14px; opacity:.9}
   .nav-links a:hover{opacity:1}
@@ -329,13 +325,13 @@
 <header class="hero-wrap">
   <div class="hero-card" id="heroCard">
     <div class="sheen" aria-hidden="true"></div>
-    <span class="fe e1" data-mood="hug"     aria-hidden="true"><i class="em">&#129303;</i></span>
-    <span class="fe e2" data-mood="cry"     aria-hidden="true"><i class="em">&#128546;</i></span>
-    <span class="fe e3" data-mood="think"   aria-hidden="true"><i class="em">&#128173;</i><span class="dots"><b>.</b><b>.</b><b>.</b></span></span>
-    <span class="fe e4" data-mood="heart"   aria-hidden="true"><i class="em">&#10084;&#65039;</i></span>
-    <span class="fe e5" data-mood="sad"     aria-hidden="true"><i class="em">&#128532;</i></span>
-    <span class="fe e6" data-mood="mute"    aria-hidden="true"><i class="em">&#128566;</i><span class="bub">can't say it</span></span>
-    <span class="fe e7" data-mood="tearful" aria-hidden="true"><i class="em">&#129401;</i></span>
+    <span class="fe e1" aria-hidden="true">&#129303;</span>
+    <span class="fe e2" aria-hidden="true">&#128546;</span>
+    <span class="fe e3" aria-hidden="true">&#128173;</span>
+    <span class="fe e4" aria-hidden="true">&#10084;&#65039;</span>
+    <span class="fe e5" aria-hidden="true">&#128532;</span>
+    <span class="fe e6" aria-hidden="true">&#128566;</span>
+    <span class="fe e7" aria-hidden="true">&#129401;</span>
 
     <div class="hero-inner">
       <p class="eyebrow hi-item hi-d1">anonymous · adults only · free</p>
