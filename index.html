@@ -35,13 +35,8 @@
     --bg:#08121A; --surface:#0F1E28; --paper:#F3EEE8; --dim:#7A9EAD;
     --warm:#F59E42; --cool:#22D3EE; --pink:#F472B6; --gold:#FBBF24; --mint:#34D399;
     --line:rgba(243,238,232,.14);
-    --grad:
-      radial-gradient(circle at 20% 22%, #0D3A48 0%, transparent 50%),
-      radial-gradient(circle at 80% 18%, #093048 0%, transparent 52%),
-      radial-gradient(circle at 75% 82%, #062030 0%, transparent 55%),
-      radial-gradient(circle at 22% 84%, #0A2838 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, #0C2030 0%, transparent 60%);
-    --grad-base:#061820;
+    --grad:none;
+    --grad-base:var(--bg);
     --disp:'Plus Jakarta Sans',system-ui,sans-serif; --sans:'Inter',system-ui,sans-serif;
     --maxw:1180px;
   }
@@ -67,8 +62,8 @@
   @media(max-width:720px){ .nav-links a:not(.os){display:none} }
 
   /* ---------- hero card (inset rounded gradient) ---------- */
-  .hero-wrap{padding:84px clamp(12px,2vw,22px) clamp(36px,5vw,64px)}
-  .hero-card{position:relative; overflow:hidden; border-radius:clamp(28px,3.6vw,40px); background-color:var(--grad-base); background-image:var(--grad); box-shadow:0 30px 80px rgba(0,0,0,.55); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:var(--paper); padding:clamp(74px,10vw,128px) 24px clamp(96px,12vw,140px); min-height:min(880px,calc(100vh - 130px))}
+  .hero-wrap{padding:0}
+  .hero-card{position:relative; overflow:hidden; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:var(--paper); padding:clamp(110px,13vw,160px) 24px clamp(80px,10vw,120px); min-height:min(900px,calc(100vh - 60px))}
   .hero-inner{max-width:920px; margin:0 auto; position:relative; z-index:2}
   .huge{font-family:var(--disp); font-weight:800; font-size:clamp(46px,10vw,108px); line-height:1.04; letter-spacing:-.02em}
   .hl{display:inline-block; background:var(--gold); color:var(--bg); border:3px solid var(--bg); border-radius:14px; box-shadow:5px 5px 0 var(--bg); padding:0 .12em; transform:rotate(-2deg)}
@@ -180,7 +175,7 @@
 
   /* final cta card */
   .final-wrap{padding:clamp(36px,5vw,72px) clamp(12px,2vw,22px) clamp(60px,8vw,96px)}
-  .final-card{position:relative; overflow:hidden; border-radius:clamp(28px,3.6vw,40px); background-color:var(--grad-base); background-image:var(--grad); box-shadow:0 30px 80px rgba(0,0,0,.5); text-align:center; color:var(--paper); padding:clamp(80px,11vw,140px) 24px}
+  .final-card{position:relative; overflow:hidden; border-radius:clamp(28px,3.6vw,40px); background:var(--surface); border:2.5px solid var(--paper); box-shadow:8px 8px 0 var(--cool); text-align:center; color:var(--paper); padding:clamp(80px,11vw,140px) 24px}
   .final-card .huge{font-size:clamp(42px,8vw,92px)}
 
   /* footer */
@@ -341,7 +336,7 @@
     <div class="hero-inner">
       <p class="eyebrow hi-item hi-d1">anonymous · adults only · free</p>
       <h1 class="huge" style="margin-top:20px"><span class="wm"><span class="w">say</span></span> <span class="wm"><span class="w">what</span></span> <span class="wm"><span class="w">you</span></span> <span class="wm"><span class="w"><span class="hl">can't</span></span></span> <span class="wm"><span class="w">say</span></span> <span class="wm"><span class="w">out</span></span> <span class="wm"><span class="w">loud</span></span></h1>
-      <p class="lead hi-item hi-d2">say the one thing you've been holding. no name. no trace. get matched to the exact person who felt it too.</p>
+      <p class="lead hi-item hi-d2">one thing. no name. matched to the exact person who felt it too.</p>
       <div class="stores hi-item hi-d3">
         <a class="store" href="#" aria-label="Download on the App Store">
           <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.46 2.22-1.2 3.02-.78.85-2.06 1.5-3.12 1.42-.13-1.12.42-2.3 1.13-3.06.79-.85 2.16-1.48 3.19-1.5.02.04.02.08 0 .12zM20.7 17.1c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-.99-4.03-.98-2.09.01-2.53.99-4.07.97-1.73-.01-3.05-1.78-4.04-3.35C-.04 15.9-.3 11.06 1.27 8.46c1.05-1.74 2.71-2.76 4.27-2.76 1.59 0 2.59 1 3.9 1 1.27 0 2.05-1 3.89-1 1.39 0 2.86.76 3.91 2.07-3.44 1.88-2.88 6.79.46 8.33z"/></svg>
