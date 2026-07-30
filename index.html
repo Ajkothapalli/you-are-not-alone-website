@@ -151,21 +151,24 @@
   .said{background:#0A1C28}
   .ac-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px; max-width:1088px; margin:0 auto; padding-right:8px; padding-bottom:8px}
   @media(max-width:880px){ .ac-grid{grid-template-columns:1fr; max-width:388px} }
-  .appcard{position:relative; background:var(--surface); border:2.5px solid var(--paper); border-radius:22px; padding:28px; min-height:420px; display:flex; flex-direction:column; will-change:transform; box-shadow:7px 7px 0 var(--you); transition:transform .14s, box-shadow .14s}
+  .appcard{position:relative; overflow:hidden; background:var(--surface); border:2.5px solid var(--paper); border-radius:22px; padding:28px; min-height:420px; display:flex; flex-direction:column; will-change:transform; box-shadow:7px 7px 0 var(--you); transition:transform .14s, box-shadow .14s}
+  .card-gfx{position:absolute; bottom:-28px; right:-28px; transform:rotate(45deg); pointer-events:none; color:var(--you); opacity:.18; width:150px; height:150px; display:flex; align-items:center; justify-content:center}
+  .card-gfx svg{width:100%; height:100%; display:block}
   .appcard:hover{transform:translate(4px,4px); box-shadow:3px 3px 0 var(--you)}
   .appcard.ember{--you:#F59E42; --them:#FBBF24}
   .appcard.twilight{--you:#22D3EE; --them:#67E8F9}
   .appcard.rose{--you:#F472B6; --them:#A8407A}
+  .appcard::before{content:''; position:absolute; top:20px; right:20px; width:11px; height:11px; border-radius:3px; background:var(--you); opacity:.85}
   .appcard .cin{display:flex; flex-direction:column; flex:1}
-  .lab{font-family:var(--disp); font-weight:700; font-size:11px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:7px}
+  .lab{display:inline-flex; align-self:flex-start; font-family:var(--disp); font-weight:800; font-size:10px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:9px; border-radius:5px; padding:3px 9px; border:1.5px solid currentColor}
   .lab.you{color:var(--you)} .lab.them{color:var(--them)}
-  .ctext{font-family:'Fraunces',Georgia,serif; font-size:19px; line-height:1.45; color:var(--paper)}
-  .seam{margin:20px 0 18px}
-  .seam .bar{display:none}
-  .seam .lbl{text-align:center; font-family:var(--disp); font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim)}
-  .cfoot{margin-top:auto; padding-top:16px; border-top:1.5px solid rgba(243,238,232,.12); display:flex; justify-content:space-between; align-items:center; gap:10px}
-  .cfelt{font-family:var(--disp); font-weight:700; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--you)}
-  .cyna{font-family:'Fraunces',Georgia,serif; font-style:italic; font-size:14px; color:rgba(243,238,232,.7)}
+  .ctext{font-family:'Fraunces',Georgia,serif; font-size:18px; line-height:1.48; color:var(--paper)}
+  .seam{margin:18px 0 16px; display:flex; align-items:center; gap:10px}
+  .seam .bar{display:block; flex:1; height:2px; background:rgba(243,238,232,.1); border-radius:1px}
+  .seam .lbl{white-space:nowrap; font-family:var(--disp); font-weight:600; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .cfoot{margin-top:auto; padding-top:14px; border-top:1.5px solid rgba(243,238,232,.1); display:flex; justify-content:space-between; align-items:center; gap:10px}
+  .cfelt{background:var(--you); color:#0A0A0A; font-family:var(--disp); font-weight:800; font-size:11px; border-radius:6px; padding:4px 10px; border:1.5px solid #0A0A0A; box-shadow:2px 2px 0 #0A0A0A}
+  .cyna{font-family:var(--disp); font-weight:700; font-size:11px; color:var(--dim); letter-spacing:.04em}
 
   /* safety */
   .pillars{display:grid; grid-template-columns:repeat(2,1fr); gap:28px}
@@ -414,6 +417,7 @@
           <p class="ctext">"Everyone thinks I'm fine. I'm barely holding on."</p>
           <div class="cfoot"><span class="cfelt">412 felt this too</span><span class="cyna">you're not alone</span></div>
         </div>
+        <div class="card-gfx" aria-hidden="true"><svg viewBox="0 0 110 90" fill="none"><rect x="5" y="5" width="46" height="34" rx="10" stroke="currentColor" stroke-width="7"/><path d="M12 39 L22 52" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><rect x="59" y="18" width="46" height="34" rx="10" stroke="currentColor" stroke-width="7"/><path d="M66 52 L76 65" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
       </article>
 
       <article class="appcard twilight fade" data-par="44">
@@ -425,6 +429,7 @@
           <p class="ctext">"Some days I grieve the person I was before them."</p>
           <div class="cfoot"><span class="cfelt">1,094 felt this too</span><span class="cyna">you're not alone</span></div>
         </div>
+        <div class="card-gfx" aria-hidden="true"><svg viewBox="0 0 120 60" fill="none"><path d="M60 30 C60 30 72 8 90 8 C108 8 116 18 116 30 C116 42 108 52 90 52 C72 52 48 8 30 8 C12 8 4 18 4 30 C4 42 12 52 30 52 C48 52 60 30 60 30Z" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </article>
 
       <article class="appcard rose fade" data-par="-54">
@@ -436,6 +441,7 @@
           <p class="ctext">"I've never felt more alone than in a full room."</p>
           <div class="cfoot"><span class="cfelt">1,530 felt this too</span><span class="cyna">you're not alone</span></div>
         </div>
+        <div class="card-gfx" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M40 6 L74 40 L40 74 L6 40 Z" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/><path d="M40 22 L58 40 L40 58 L22 40 Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg></div>
       </article>
     </div>
   </div>
