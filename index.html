@@ -560,6 +560,9 @@
 </footer>
 
 <script>
+  if (history.scrollRestoration) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   var reduce  = matchMedia('(prefers-reduced-motion: reduce)').matches;
