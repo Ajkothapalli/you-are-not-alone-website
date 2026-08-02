@@ -866,15 +866,17 @@
       {n:'thought',t:'81%',l:'2%',s:56,r:-15},{n:'knot',t:'80%',l:'19%',s:56,r:-25},{n:'fire',t:'82%',l:'36%',s:52,r:8},{n:'hug',t:'80%',l:'54%',s:60,r:0},{n:'teardrop',t:'81%',l:'71%',s:48,r:20},{n:'flower',t:'79%',l:'87%',s:56,r:-5},
       {n:'seedling',t:'89%',l:'10%',s:48,r:18},{n:'quote_mark',t:'88%',l:'28%',s:52,r:15},{n:'heart',t:'90%',l:'44%',s:56,r:-10},{n:'lightning',t:'88%',l:'62%',s:48,r:20},{n:'eye',t:'89%',l:'79%',s:52,r:-5},{n:'fingerprint',t:'87%',l:'93%',s:44,r:10}
     ];
+    var SCALE = 0.6; /* tune here — 1.0 = 2× mobile, 0.5 = original mobile */
     var ns = 'http://www.w3.org/2000/svg';
     var wrap = document.getElementById('bg-pattern');
     if (!wrap) return;
     PT.forEach(function(item){
       var paths = IC[item.n]; if (!paths) return;
+      var sz = Math.round(item.s * SCALE);
       var el = document.createElement('div');
       el.style.cssText = 'position:absolute;top:'+item.t+';left:'+item.l+';transform:rotate('+item.r+'deg)';
       var svg = document.createElementNS(ns,'svg');
-      svg.setAttribute('width', item.s); svg.setAttribute('height', item.s);
+      svg.setAttribute('width', sz); svg.setAttribute('height', sz);
       svg.setAttribute('viewBox','0 0 48 48');
       var g = document.createElementNS(ns,'g');
       g.setAttribute('stroke','#F3EEE8'); g.setAttribute('stroke-width','2.5');
